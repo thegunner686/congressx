@@ -1,7 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "lint": "yarn eslint ."
+    "lint": "yarn eslint .",
+    "format": "yarn prettier . --write",
+    "format-check": "yarn prettier . --check",
+    "format-lint": "yarn format && yarn lint"
   },
   "workspaces": {
     "packages": [
