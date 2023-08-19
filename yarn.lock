@@ -4530,6 +4530,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/auth-supabase-api@npm:6.1.0":
+  version: 6.1.0
+  resolution: "@redwoodjs/auth-supabase-api@npm:6.1.0"
+  dependencies:
+    "@babel/runtime-corejs3": 7.22.10
+    core-js: 3.32.0
+    jsonwebtoken: 9.0.0
+  checksum: 739b64161e689e6e501c3b0b4dd527ce9939c61f1b9f36e76174e68b868c0ac5d93dca0220dc5cdef155edc92c77ad47dc741c62873077f21b2817818047b074
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/auth-supabase-setup@npm:6.1.0":
   version: 6.1.0
   resolution: "@redwoodjs/auth-supabase-setup@npm:6.1.0"
@@ -7099,6 +7110,7 @@ __metadata:
   resolution: "api@workspace:api"
   dependencies:
     "@redwoodjs/api": 6.1.0
+    "@redwoodjs/auth-supabase-api": 6.1.0
     "@redwoodjs/graphql-server": 6.1.0
   languageName: unknown
   linkType: soft
