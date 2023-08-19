@@ -6,6 +6,9 @@
     "format-check": "yarn prettier . --check",
     "format-lint": "yarn format && yarn lint"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "workspaces": {
     "packages": [
       "api",
@@ -13,11 +16,14 @@
     ]
   },
   "devDependencies": {
+    "@redwoodjs/auth-supabase-setup": "6.1.0",
     "@redwoodjs/core": "6.1.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.0",
     "prettier": "3.0.2"
   },
   "eslintConfig": {
