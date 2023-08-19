@@ -9,11 +9,15 @@ import { logger } from 'src/lib/logger'
 
 export const handler = createGraphQLHandler({
   loggerConfig: { logger, options: {} },
+  // eslint-disable-next-line
   directives,
+  // eslint-disable-next-line
   sdls,
+  // eslint-disable-next-line
   services,
   onException: () => {
     // Disconnect from your database with an unhandled exception.
+    // eslint-disable-next-line
     db.$disconnect()
   },
 })
