@@ -11,8 +11,6 @@ import { Router, Route } from "@redwoodjs/router";
 
 import { useAuth } from "./auth";
 
-import { useAuth } from "./auth";
-
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>

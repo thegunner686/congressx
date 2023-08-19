@@ -8,8 +8,6 @@ import "./index.css";
 
 import { AuthProvider, useAuth } from "./auth";
 
-import { AuthProvider, useAuth } from "./auth";
-
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
