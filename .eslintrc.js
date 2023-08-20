@@ -15,7 +15,10 @@ module.exports = {
     ],
     tsconfigRootDir: __dirname,
   },
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/require-await": "off",
+  },
   overrides: [
     {
       files: ["*.js", "vite.config.ts", "graphql.d.ts"],
