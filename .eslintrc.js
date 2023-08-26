@@ -23,6 +23,7 @@ module.exports = {
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
   },
   overrides: [
     {
