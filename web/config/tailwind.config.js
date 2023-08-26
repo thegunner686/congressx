@@ -1,15 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
-
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  purge: {
-    content: [
-      "./src/pages/**/*.{js,jsx,ts,tsx}",
-      "./src/components/**/*.{js,jsx,ts,tsx}",
-    ],
-    // These options are passed through directly to PurgeCSS
-  },
+  content: ["src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       textShadow: {
@@ -33,16 +24,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    plugin(function ({ matchUtilities, theme }) {
-      matchUtilities(
-        {
-          "text-shadow": (value) => ({
-            textShadow: value,
-          }),
-        },
-        { values: theme("textShadow") },
-      );
-    }),
-  ],
+  plugins: [],
 };

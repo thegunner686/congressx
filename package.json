@@ -24,7 +24,8 @@
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.0",
-    "prettier": "3.0.2"
+    "prettier": "3.0.2",
+    "prettier-plugin-tailwindcss": "^0.5.3"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
@@ -37,8 +38,5 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.6.1",
-  "dependencies": {
-    "prettier-plugin-tailwindcss": "^0.5.3"
-  }
+  "packageManager": "yarn@3.6.1"
 }
