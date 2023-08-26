@@ -30,13 +30,11 @@ const LoginPage = () => {
   }, []);
 
   const onSubmit = async (data: Record<string, string>) => {
-    console.log({ data });
     const response = await logIn({
       authMethod: "password",
       email: data.username,
       password: data.password,
     });
-    console.log(response);
 
     // @ts-ignore
     if (response.message) {
@@ -53,27 +51,23 @@ const LoginPage = () => {
     <>
       <MetaTags title="Login" />
 
-      <main className="rw-main">
+      <main className="animate-fade-in flex flex-col items-center justify-center flex-grow">
         <Toaster toastOptions={{ className: "rw-toast", duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className=" bg-white rounded shadow shadow-gray-400 w-96 h-auto p-4 flex flex-col">
           <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
-            </header>
-
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                <Form onSubmit={onSubmit} className="flex flex-col">
                   <Label
                     name="username"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="text-night font-archivo"
+                    errorClassName="text-red-500"
                   >
                     Username
                   </Label>
                   <TextField
                     name="username"
-                    className="rw-input"
+                    className="text-night p-2 rounded"
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
                     validation={{
@@ -88,14 +82,14 @@ const LoginPage = () => {
 
                   <Label
                     name="password"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="font-archivo text-night mt-4 mb-1"
+                    errorClassName="text-red-500"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="rw-input"
+                    className="text-night p-2 rounded"
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
@@ -106,27 +100,28 @@ const LoginPage = () => {
                     }}
                   />
 
-                  <div className="rw-forgot-link">
-                    <Link
-                      to={routes.forgotPassword()}
-                      className="rw-forgot-link"
-                    >
-                      Forgot Password?
-                    </Link>
-                  </div>
+                  <Link
+                    to={routes.forgotPassword()}
+                    className="font-archivo font-bold text-majorelle-blue mt-4"
+                  >
+                    Forgot Password?
+                  </Link>
 
                   <FieldError name="password" className="rw-field-error" />
 
-                  <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Login</Submit>
-                  </div>
+                  <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
+                    Login
+                  </Submit>
                 </Form>
               </div>
             </div>
           </div>
           <div className="rw-login-link">
             <span>Don&apos;t have an account?</span>{" "}
-            <Link to={routes.signup()} className="rw-link">
+            <Link
+              to={routes.signup()}
+              className="font-archivo font-bold text-majorelle-blue"
+            >
               Sign up!
             </Link>
           </div>

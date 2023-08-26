@@ -52,27 +52,23 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="rw-main">
+      <main className="animate-fade-in flex flex-col items-center justify-center flex-grow">
         <Toaster toastOptions={{ className: "rw-toast", duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className=" bg-white rounded shadow shadow-gray-400 w-96 h-auto p-4 flex flex-col">
           <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
-            </header>
-
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                <Form onSubmit={onSubmit} className="flex flex-col">
                   <Label
                     name="username"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="text-night font-archivo"
+                    errorClassName="text-red-500"
                   >
                     Username
                   </Label>
                   <TextField
                     name="username"
-                    className="rw-input"
+                    className="text-night p-2 rounded"
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
                     validation={{
@@ -86,14 +82,14 @@ const SignupPage = () => {
 
                   <Label
                     name="password"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="font-archivo text-night mt-4 mb-1"
+                    errorClassName="text-red-500"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="rw-input"
+                    className="text-night p-2 rounded"
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
@@ -105,18 +101,19 @@ const SignupPage = () => {
                   />
                   <FieldError name="password" className="rw-field-error" />
 
-                  <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">
-                      Sign Up
-                    </Submit>
-                  </div>
+                  <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
+                    Sign Up
+                  </Submit>
                 </Form>
               </div>
             </div>
           </div>
           <div className="rw-login-link">
             <span>Already have an account?</span>{" "}
-            <Link to={routes.login()} className="rw-link">
+            <Link
+              to={routes.login()}
+              className="font-archivo font-bold text-majorelle-blue"
+            >
               Log in!
             </Link>
           </div>

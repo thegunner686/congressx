@@ -24,8 +24,8 @@ const ForgotPasswordPage = () => {
   const onSubmit = async (data: { username: string }) => {
     const response = await forgotPassword(data.username);
 
-    if (response.error) {
-      toast.error(response.error);
+    if (response.error?.message) {
+      toast.error(response.error.message);
     } else {
       // The function `forgotPassword.handler` in api/src/functions/auth.js has
       // been invoked, let the user know how to get the link to reset their
@@ -41,46 +41,41 @@ const ForgotPasswordPage = () => {
     <>
       <MetaTags title="Forgot Password" />
 
-      <main className="rw-main">
+      <main className="animate-fade-in flex flex-col items-center justify-center flex-grow">
         <Toaster toastOptions={{ className: "rw-toast", duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <header className="mt-8 mb-8">
+          <h1 className="font-archivo text-night text-2xl">Forgot Password</h1>
+        </header>
+        <div className=" bg-white rounded shadow shadow-gray-400 w-96 h-auto p-4 flex flex-col">
           <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">
-                Forgot Password
-              </h2>
-            </header>
-
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <div className="text-left">
-                    <Label
-                      name="username"
-                      className="rw-label"
-                      errorClassName="rw-label rw-label-error"
-                    >
-                      Username
-                    </Label>
-                    <TextField
-                      name="username"
-                      className="rw-input"
-                      errorClassName="rw-input rw-input-error"
-                      ref={usernameRef}
-                      validation={{
-                        required: {
-                          value: true,
-                          message: "Username is required",
-                        },
-                      }}
-                    />
+                <Form onSubmit={onSubmit} className="flex flex-col">
+                  <Label
+                    name="username"
+                    className="text-night font-archivo"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Email
+                  </Label>
+                  <TextField
+                    name="username"
+                    className="text-night p-2 rounded bg-gray-100"
+                    errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: "Username is required",
+                      },
+                    }}
+                  />
 
-                    <FieldError name="username" className="rw-field-error" />
-                  </div>
+                  <FieldError name="username" className="rw-field-error" />
 
-                  <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Submit</Submit>
-                  </div>
+                  <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
+                    Submit
+                  </Submit>
                 </Form>
               </div>
             </div>

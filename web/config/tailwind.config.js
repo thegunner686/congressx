@@ -22,6 +22,15 @@ module.exports = {
         bebas: ["Bebas Neue", "sans-serif"],
         archivo: ["Archivo Black", "sans-serif"],
       },
+      animation: {
+        "fade-in": "fade-in 0.5s ease 1",
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      },
     },
   },
   plugins: [

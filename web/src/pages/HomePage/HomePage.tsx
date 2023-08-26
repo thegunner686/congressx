@@ -1,18 +1,14 @@
 import { Link, routes } from "@redwoodjs/router";
 import { MetaTags } from "@redwoodjs/web";
+import Title from "src/components/Title/Title";
 
 const HomePage = () => {
   return (
     <>
       <MetaTags title="Home" description="Home page" />
-      <main className="home-background flex flex-grow h-screen w-screen items-center flex-col bg-night">
+      <main className="home-background flex flex-grow h-screen w-screen items-center flex-col bg-night animate-fade-in">
         <div className="flex-1 flex items-center justify-center flex-col">
-          <div className="font-extrabold text-4xl uppercase text-white shadow-silver text-shadow-sm mt-16 md:text-7xl flex items-center justify-center font-archivo text-center">
-            <span className="material-icons font-extrabold md:text-7xl text-5xl">
-              account_balance
-            </span>
-            CongressX
-          </div>
+          <Title />
           <div className="text-lg md:text-2xl text-center text-white font-archivo">
             The voice of the people.
           </div>
