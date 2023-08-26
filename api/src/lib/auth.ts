@@ -41,10 +41,10 @@ export const getCurrentUser = async (
   const { roles } = parseJWT({ decoded });
 
   if (roles) {
-    return { ...decoded, roles } as RedwoodUser;
+    return { ...decoded, roles };
   }
 
-  return { ...decoded } as RedwoodUser;
+  return { ...decoded };
 };
 
 /**

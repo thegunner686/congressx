@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.home-background {
-  background-image: url("/virginia.png");
-  background-position: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
