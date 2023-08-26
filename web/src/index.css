@@ -5,6 +5,6 @@
 @tailwind utilities;
 
 .home-background {
-  background-image: url("../public/virginia.png");
+  background-image: url("/virginia.png");
   background-position: center;
 }
