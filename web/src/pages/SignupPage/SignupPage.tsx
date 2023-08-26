@@ -68,7 +68,7 @@ const SignupPage = () => {
                   </Label>
                   <TextField
                     name="username"
-                    className="text-night p-2 rounded"
+                    className="text-night p-2 rounded bg-gray-100"
                     errorClassName="rw-input rw-input-error"
                     ref={usernameRef}
                     validation={{
@@ -89,7 +89,7 @@ const SignupPage = () => {
                   </Label>
                   <PasswordField
                     name="password"
-                    className="text-night p-2 rounded"
+                    className="text-night p-2 rounded bg-gray-100"
                     errorClassName="rw-input rw-input-error"
                     autoComplete="current-password"
                     validation={{
