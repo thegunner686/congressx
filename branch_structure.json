@@ -1,0 +1,21 @@
+{
+  "default_branch": "master",
+  "branches": [
+    "gunners/home-page",
+    "gunners/redesign",
+    "master",
+    "origin"
+  ],
+  "parent": {
+    "gunners/home-page": "master",
+    "gunners/redesign": "master",
+    "master": null,
+    "origin": "master"
+  },
+  "order": [
+    "master",
+    "gunners/home-page",
+    "gunners/redesign",
+    "origin"
+  ]
+}

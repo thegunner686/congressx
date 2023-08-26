@@ -37,5 +37,8 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "dependencies": {
+    "prettier-plugin-tailwindcss": "^0.5.3"
+  }
 }
