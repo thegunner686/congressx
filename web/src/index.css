@@ -1,8 +1,7 @@
 /* purgecss start ignore */
+/* purgecss end ignore */
 @tailwind base;
 @tailwind components;
-/* purgecss end ignore */
-
 @tailwind utilities;
 
 .home-background {
