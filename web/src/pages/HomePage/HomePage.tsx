@@ -10,7 +10,7 @@ const HomePage = () => {
       <p>
         Find me in <code>./web/src/pages/HomePage/HomePage.tsx</code>
       </p>
-      <p>
+      <p className="bg-red-300 font-bold text-xl">
         My default route is named <code>home</code>, link to me with `
         <Link to={routes.home()}>Home</Link>`
       </p>
