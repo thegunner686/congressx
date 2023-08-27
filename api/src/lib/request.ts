@@ -20,9 +20,9 @@ export const url_builder = (base: string, params: QueryParam[]) => {
 
   const done = () => {
     const query_params = params
-      .map(({ name, value }) => `?${name}=${value}`)
-      .join("");
-    return `${base}${query_params}`;
+      .map(({ name, value }) => `${name}=${value}`)
+      .join("&");
+    return `${base}?${query_params}`;
   };
 
   return {
