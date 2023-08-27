@@ -47,11 +47,8 @@ export const Success = ({ user }: CellSuccessProps<EditUserById>) => {
     },
   });
 
-  const onSave = async (
-    input: UpdateUserInput,
-    id: EditUserById["user"]["id"],
-  ) => {
-    await updateUser({ variables: { id, input } });
+  const onSave = (input: UpdateUserInput, id: EditUserById["user"]["id"]) => {
+    updateUser({ variables: { id, input } });
   };
 
   return (

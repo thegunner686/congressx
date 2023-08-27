@@ -30,9 +30,9 @@ const UsersList = ({ users }: FindUsers) => {
     awaitRefetchQueries: true,
   });
 
-  const onDeleteClick = async (id: DeleteUserMutationVariables["id"]) => {
+  const onDeleteClick = (id: DeleteUserMutationVariables["id"]) => {
     if (confirm("Are you sure you want to delete user " + id + "?")) {
-      await deleteUser({ variables: { id } });
+      deleteUser({ variables: { id } });
     }
   };
 
