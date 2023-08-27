@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 
 import {
@@ -36,6 +36,7 @@ interface FormValues {
 
 const SignupPage = () => {
   const { isAuthenticated, signUp, logIn } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [createUser] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
@@ -53,6 +54,7 @@ const SignupPage = () => {
   }, []);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
+    setLoading(true);
     const response = await signUp({
       email: data.email,
       password: data.password,
@@ -79,6 +81,7 @@ const SignupPage = () => {
       });
       toast.success("Welcome!");
     }
+    setLoading(false);
   };
 
   return (
@@ -163,7 +166,12 @@ const SignupPage = () => {
                     className="text-crayola-red font-light"
                   />
 
-                  <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
+                  <Submit
+                    disabled={loading}
+                    className={`${
+                      loading ? "animate-pulse" : ""
+                    } text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4`}
+                  >
                     Sign Up
                   </Submit>
                 </Form>

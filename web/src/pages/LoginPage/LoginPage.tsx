@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 
 import {
@@ -17,6 +17,7 @@ import { useAuth } from "src/auth";
 
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -30,6 +31,7 @@ const LoginPage = () => {
   }, []);
 
   const onSubmit = async (data: Record<string, string>) => {
+    setLoading(true);
     const response = await logIn({
       authMethod: "password",
       email: data.username,
@@ -45,6 +47,7 @@ const LoginPage = () => {
     } else {
       toast.success("Welcome back!");
     }
+    setLoading(false);
   };
 
   return (
@@ -115,7 +118,12 @@ const LoginPage = () => {
                     className="text-crayola-red font-light"
                   />
 
-                  <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
+                  <Submit
+                    disabled={loading}
+                    className={`${
+                      loading ? "animate-pulse" : ""
+                    } text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4`}
+                  >
                     Login
                   </Submit>
                 </Form>
