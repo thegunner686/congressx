@@ -21,6 +21,7 @@ import { CreateUserMutation, CreateUserMutationVariables } from "types/graphql";
 const CREATE_USER = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
+      id
       email
       name
     }
@@ -34,7 +35,7 @@ interface FormValues {
 }
 
 const SignupPage = () => {
-  const { isAuthenticated, signUp } = useAuth();
+  const { isAuthenticated, signUp, logIn } = useAuth();
   const [createUser] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
@@ -58,17 +59,19 @@ const SignupPage = () => {
     });
 
     console.log({ response });
-
-    // @ts-ignore
-    if (response?.message) {
-      // @ts-ignore
-      toast(response?.message);
-    } else if (response.error?.message) {
+    if (response.error?.message) {
       toast.error(response.error.message);
     } else {
+      await logIn({
+        authMethod: "password",
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response.data.user.id);
       await createUser({
         variables: {
           input: {
+            id: response.data.user.id,
             email: data.email,
             name: data.name,
           },

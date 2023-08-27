@@ -13,7 +13,6 @@ import { logger } from "src/lib/logger";
 export const handler = createGraphQLHandler({
   authDecoder,
   getCurrentUser,
-  getCurrentUser,
   loggerConfig: { logger, options: {} },
   // eslint-disable-next-line
   directives,

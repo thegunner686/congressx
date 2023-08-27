@@ -8,7 +8,7 @@ import { truncate } from "src/lib/formatters";
 import type { DeleteUserMutationVariables, FindUsers } from "types/graphql";
 
 const DELETE_USER_MUTATION = gql`
-  mutation DeleteUserMutation($id: Int!) {
+  mutation DeleteUserMutation($id: String!) {
     deleteUser(id: $id) {
       id
     }
@@ -30,9 +30,9 @@ const UsersList = ({ users }: FindUsers) => {
     awaitRefetchQueries: true,
   });
 
-  const onDeleteClick = (id: DeleteUserMutationVariables["id"]) => {
+  const onDeleteClick = async (id: DeleteUserMutationVariables["id"]) => {
     if (confirm("Are you sure you want to delete user " + id + "?")) {
-      deleteUser({ variables: { id } });
+      await deleteUser({ variables: { id } });
     }
   };
 

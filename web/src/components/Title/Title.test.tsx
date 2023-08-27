@@ -8,7 +8,7 @@ import Title from "./Title";
 describe("Title", () => {
   it("renders successfully", () => {
     expect(() => {
-      render(<Title />);
+      render(<Title size="lg" />);
     }).not.toThrow();
   });
 });

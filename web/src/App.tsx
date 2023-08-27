@@ -7,13 +7,16 @@ import Routes from "src/Routes";
 import "./index.css";
 
 import { AuthProvider, useAuth } from "./auth";
+import { UserProvider } from "./contexts/UserContext";
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
       <AuthProvider>
         <RedwoodApolloProvider useAuth={useAuth}>
-          <Routes />
+          <UserProvider>
+            <Routes />
+          </UserProvider>
         </RedwoodApolloProvider>
       </AuthProvider>
     </RedwoodProvider>

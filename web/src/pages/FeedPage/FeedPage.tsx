@@ -1,9 +1,16 @@
 import { Link, routes } from "@redwoodjs/router";
 import { MetaTags } from "@redwoodjs/web";
+import { useEffect } from "react";
 import { useAuth } from "src/auth";
+import { useUserContext } from "src/contexts/UserContext";
 
 const FeedPage = () => {
   const { logOut } = useAuth();
+  const [user] = useUserContext();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const onLogoutClick = async () => {
     await logOut();

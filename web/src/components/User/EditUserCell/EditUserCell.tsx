@@ -8,7 +8,7 @@ import { toast } from "@redwoodjs/web/toast";
 import UserForm from "src/components/User/UserForm";
 
 export const QUERY = gql`
-  query EditUserById($id: Int!) {
+  query EditUserById($id: String!) {
     user: user(id: $id) {
       id
       email
@@ -19,7 +19,7 @@ export const QUERY = gql`
   }
 `;
 const UPDATE_USER_MUTATION = gql`
-  mutation UpdateUserMutation($id: Int!, $input: UpdateUserInput!) {
+  mutation UpdateUserMutation($id: String!, $input: UpdateUserInput!) {
     updateUser(id: $id, input: $input) {
       id
       email
@@ -47,8 +47,11 @@ export const Success = ({ user }: CellSuccessProps<EditUserById>) => {
     },
   });
 
-  const onSave = (input: UpdateUserInput, id: EditUserById["user"]["id"]) => {
-    updateUser({ variables: { id, input } });
+  const onSave = async (
+    input: UpdateUserInput,
+    id: EditUserById["user"]["id"],
+  ) => {
+    await updateUser({ variables: { id, input } });
   };
 
   return (
