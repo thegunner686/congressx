@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@redwoodjs/auth-supabase-setup": "6.1.0",
+    "@redwoodjs/cli-storybook": "6.1.0",
     "@redwoodjs/core": "6.1.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",

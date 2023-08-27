@@ -18,7 +18,7 @@ import { useAuth } from "src/auth";
 
 import { CreateUserMutation, CreateUserMutationVariables } from "types/graphql";
 
-const CREATE_USER = gql`
+export const CREATE_USER_MUTATION = gql`
   mutation CreateUserMutation($input: CreateUserInput!) {
     createUser(input: $input) {
       id
@@ -40,7 +40,7 @@ const SignupPage = () => {
   const [createUser] = useMutation<
     CreateUserMutation,
     CreateUserMutationVariables
-  >(CREATE_USER);
+  >(CREATE_USER_MUTATION);
 
   useEffect(() => {
     if (isAuthenticated) {

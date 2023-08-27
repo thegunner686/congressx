@@ -15,3 +15,14 @@ model User {
   state String?
   district Int?
 }
+
+model Representative {
+  id String @id @default(uuid())
+  imageUrl String
+  invertedOrderName String
+  partyName String
+  startYear Int
+  state String
+  district Int?
+  currentChamber String
+}
