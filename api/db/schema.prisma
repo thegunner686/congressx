@@ -26,3 +26,9 @@ model Representative {
   district Int?
   currentChamber String
 }
+
+model State {
+  name String @id
+  abbreviation String
+  imageUrl String
+}

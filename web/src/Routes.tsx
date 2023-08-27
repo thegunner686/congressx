@@ -21,6 +21,22 @@ const Routes = () => {
     <Router useAuth={useAuth}>
       <Set
         wrap={ScaffoldLayout}
+        title="States"
+        titleTo="states"
+        buttonLabel="New State"
+        buttonTo="newState"
+      >
+        <Route path="/states/new" page={StateNewStatePage} name="newState" />
+        <Route
+          path="/states/{id}/edit"
+          page={StateEditStatePage}
+          name="editState"
+        />
+        <Route path="/states/{id}" page={StateStatePage} name="state" />
+        <Route path="/states" page={StateStatesPage} name="states" />
+      </Set>
+      <Set
+        wrap={ScaffoldLayout}
         title="Users"
         titleTo="users"
         buttonLabel="New User"
@@ -52,6 +68,11 @@ const Routes = () => {
       <Private unauthenticated="home" wrap={[UserProvider, AppLayout]}>
         <Route path="/feed" page={FeedPage} name="feed" />
         <Route path="/discover" page={DiscoverPage} name="discover" />
+        <Route
+          path="/state-selection"
+          page={StateSelectionPage}
+          name="stateSelection"
+        />
       </Private>
       <Route path="/" page={HomePage} name="home" />
       <Route notfound page={NotFoundPage} />
