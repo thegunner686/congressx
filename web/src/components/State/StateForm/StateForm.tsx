@@ -35,6 +35,24 @@ const StateForm = (props: StateFormProps) => {
         />
 
         <Label
+          name="name"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Name
+        </Label>
+
+        <TextField
+          name="name"
+          defaultValue={props.state?.name}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="name" className="rw-field-error" />
+
+        <Label
           name="abbreviation"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

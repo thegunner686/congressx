@@ -8,6 +8,7 @@ import States from "src/components/State/States";
 export const QUERY = gql`
   query FindStates {
     states {
+      id
       name
       abbreviation
       imageUrl

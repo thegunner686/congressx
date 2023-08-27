@@ -28,7 +28,8 @@ model Representative {
 }
 
 model State {
-  name String @id
+  id String @id
+  name String
   abbreviation String
   imageUrl String
 }

@@ -7,6 +7,7 @@ import State from "src/components/State/State";
 export const QUERY = gql`
   query FindStateById($id: String!) {
     state: state(id: $id) {
+      id
       name
       abbreviation
       imageUrl

@@ -1,5 +1,6 @@
 export const schema = gql`
   type State {
+    id: String!
     name: String!
     abbreviation: String!
     imageUrl: String!

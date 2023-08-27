@@ -24,9 +24,15 @@ describe("states", () => {
 
   scenario("creates a state", async () => {
     const result = await createState({
-      input: { name: "String", abbreviation: "String", imageUrl: "String" },
+      input: {
+        id: "String",
+        name: "String",
+        abbreviation: "String",
+        imageUrl: "String",
+      },
     });
 
+    expect(result.id).toEqual("String");
     expect(result.name).toEqual("String");
     expect(result.abbreviation).toEqual("String");
     expect(result.imageUrl).toEqual("String");
@@ -36,10 +42,10 @@ describe("states", () => {
     const original = (await state({ id: scenario.state.one.id })) as State;
     const result = await updateState({
       id: original.id,
-      input: { name: "String2" },
+      input: { id: "String2" },
     });
 
-    expect(result.name).toEqual("String2");
+    expect(result.id).toEqual("String2");
   });
 
   scenario("deletes a state", async (scenario: StandardScenario) => {

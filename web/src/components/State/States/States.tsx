@@ -41,6 +41,7 @@ const StatesList = ({ states }: FindStates) => {
       <table className="rw-table">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Abbreviation</th>
             <th>Image url</th>
@@ -50,6 +51,7 @@ const StatesList = ({ states }: FindStates) => {
         <tbody>
           {states.map((state) => (
             <tr key={state.id}>
+              <td>{truncate(state.id)}</td>
               <td>{truncate(state.name)}</td>
               <td>{truncate(state.abbreviation)}</td>
               <td>{truncate(state.imageUrl)}</td>

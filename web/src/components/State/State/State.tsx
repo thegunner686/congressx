@@ -49,6 +49,10 @@ const State = ({ state }: Props) => {
         <table className="rw-table">
           <tbody>
             <tr>
+              <th>Id</th>
+              <td>{state.id}</td>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{state.name}</td>
             </tr>

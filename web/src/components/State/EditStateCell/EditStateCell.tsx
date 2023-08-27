@@ -10,6 +10,7 @@ import StateForm from "src/components/State/StateForm";
 export const QUERY = gql`
   query EditStateById($id: String!) {
     state: state(id: $id) {
+      id
       name
       abbreviation
       imageUrl
@@ -19,6 +20,7 @@ export const QUERY = gql`
 const UPDATE_STATE_MUTATION = gql`
   mutation UpdateStateMutation($id: String!, $input: UpdateStateInput!) {
     updateState(id: $id, input: $input) {
+      id
       name
       abbreviation
       imageUrl
