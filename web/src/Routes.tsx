@@ -13,6 +13,7 @@ import ScaffoldLayout from "src/layouts/ScaffoldLayout";
 
 import { useAuth } from "./auth";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
+import { UserProvider } from "./contexts/UserContext";
 
 const Routes = () => {
   return (
@@ -47,7 +48,7 @@ const Routes = () => {
           name="resetPassword"
         />
       </Set>
-      <Private unauthenticated="home">
+      <Private unauthenticated="home" wrap={UserProvider}>
         <Route path="/feed" page={FeedPage} name="feed" />
         <Route path="/discover" page={DiscoverPage} name="discover" />
       </Private>
