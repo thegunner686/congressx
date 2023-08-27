@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "src/auth";
 import { User } from "types/graphql";
 
-const UserContext = React.createContext([undefined]);
+const UserContext = React.createContext(undefined);
 
 export const GET_USER = gql`
   query FindUserById($id: String!) {
@@ -24,15 +24,15 @@ const UserProvider = ({ children }) => {
       id: currentUser?.sub as string,
     },
   });
-  const [user, setUser] = useState<User>(data);
+  const [user, setUser] = useState<User>(data?.user);
 
   useEffect(() => {
-    setUser(data);
+    setUser(data?.user);
   }, [data]);
 
-  return <UserContext.Provider value={[user]}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
-const useUserContext = () => React.useContext(UserContext);
+const useUserContext = () => React.useContext<User>(UserContext);
 
 export { UserProvider, UserContext, useUserContext };

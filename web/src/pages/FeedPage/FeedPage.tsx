@@ -6,7 +6,7 @@ import { useUserContext } from "src/contexts/UserContext";
 
 const FeedPage = () => {
   const { logOut } = useAuth();
-  const [user] = useUserContext();
+  const user = useUserContext();
 
   useEffect(() => {
     console.log(user);
@@ -20,14 +20,9 @@ const FeedPage = () => {
     <>
       <MetaTags title="Feed" description="Feed page" />
 
-      <h1>FeedPage</h1>
-      <p>
-        Find me in <code>./web/src/pages/FeedPage/FeedPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>feed</code>, link to me with `
-        <Link to={routes.feed()}>Feed</Link>`
-      </p>
+      <h1 className="font-archivo text-2xl">
+        Hey, <span className=" text-verdigris">{user?.name}</span>!
+      </h1>
       <button onClick={onLogoutClick}>Log Out</button>
     </>
   );
