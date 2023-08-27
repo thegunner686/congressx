@@ -9,7 +9,7 @@ const HomePage = () => {
       <main className="home-background flex flex-grow h-screen w-screen items-center flex-col bg-night animate-fade-in">
         <div className="flex-1 flex items-center justify-center flex-col">
           <Title size="lg" />
-          <div className="text-lg md:text-2xl text-center text-white font-archivo">
+          <div className="text-lg md:text-2xl text-center text-white font-archivo shadow-silver text-shadow-sm">
             The voice of the people.
           </div>
         </div>

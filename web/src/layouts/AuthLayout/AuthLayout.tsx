@@ -10,7 +10,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
     <div className="animate-fade-in h-screen w-screen flex flex-col">
       <nav className="w-screen h-16 bg-night shadow-sm shadow-night flex flex-row items-center p-4 justify-start">
         <Link to={routes.home()}>
-          <Title size="small" />
+          <Title size="sm" />
         </Link>
       </nav>
       {children}

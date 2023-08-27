@@ -8,15 +8,37 @@ import {
   PasswordField,
   FieldError,
   Submit,
+  SubmitHandler,
 } from "@redwoodjs/forms";
 import { Link, navigate, routes } from "@redwoodjs/router";
-import { MetaTags } from "@redwoodjs/web";
+import { MetaTags, useMutation } from "@redwoodjs/web";
 import { toast, Toaster } from "@redwoodjs/web/toast";
 
 import { useAuth } from "src/auth";
 
+import { CreateUserMutation, CreateUserMutationVariables } from "types/graphql";
+
+const CREATE_USER = gql`
+  mutation CreateUserMutation($input: CreateUserInput!) {
+    createUser(input: $input) {
+      email
+      name
+    }
+  }
+`;
+
+interface FormValues {
+  email: string;
+  password: string;
+  name: string;
+}
+
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth();
+  const [createUser] = useMutation<
+    CreateUserMutation,
+    CreateUserMutationVariables
+  >(CREATE_USER);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -24,17 +46,17 @@ const SignupPage = () => {
     }
   }, [isAuthenticated]);
 
-  // focus on username box on page load
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    usernameRef.current?.focus();
+    nameRef.current?.focus();
   }, []);
 
-  const onSubmit = async (data: Record<string, string>) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     const response = await signUp({
-      email: data.username,
+      email: data.email,
       password: data.password,
     });
+
     console.log({ response });
 
     // @ts-ignore
@@ -44,6 +66,14 @@ const SignupPage = () => {
     } else if (response.error?.message) {
       toast.error(response.error.message);
     } else {
+      await createUser({
+        variables: {
+          input: {
+            email: data.email,
+            name: data.name,
+          },
+        },
+      });
       toast.success("Welcome!");
     }
   };
@@ -60,37 +90,63 @@ const SignupPage = () => {
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="flex flex-col">
                   <Label
-                    name="username"
-                    className="text-night font-archivo"
-                    errorClassName="text-red-500"
+                    name="Name"
+                    className="text-night font-archivo mb-1"
+                    errorClassName="font-archivo text-night mt-4 mb-1"
                   >
-                    Username
+                    Name
                   </Label>
                   <TextField
-                    name="username"
+                    name="name"
                     className="text-night p-2 rounded bg-gray-100"
-                    errorClassName="rw-input rw-input-error"
-                    ref={usernameRef}
+                    errorClassName="text-night p-2 rounded bg-red-100"
+                    ref={nameRef}
                     validation={{
                       required: {
                         value: true,
-                        message: "Username is required",
+                        message: "Name is required",
                       },
                     }}
                   />
-                  <FieldError name="username" className="rw-field-error" />
+                  <FieldError
+                    name="name"
+                    className="text-crayola-red font-light"
+                  />
+
+                  <Label
+                    name="email"
+                    className="text-night font-archivo mt-4 mb-1"
+                    errorClassName="font-archivo text-night mt-4 mb-1"
+                  >
+                    Email
+                  </Label>
+                  <TextField
+                    name="email"
+                    className="text-night p-2 rounded bg-gray-100"
+                    errorClassName="text-night p-2 rounded bg-red-100"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                    }}
+                  />
+                  <FieldError
+                    name="email"
+                    className="text-crayola-red font-light"
+                  />
 
                   <Label
                     name="password"
                     className="font-archivo text-night mt-4 mb-1"
-                    errorClassName="text-red-500"
+                    errorClassName="font-archivo text-night mt-4 mb-1"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
                     className="text-night p-2 rounded bg-gray-100"
-                    errorClassName="rw-input rw-input-error"
+                    errorClassName="text-night p-2 rounded bg-red-100"
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -99,7 +155,10 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="password" className="rw-field-error" />
+                  <FieldError
+                    name="password"
+                    className="text-crayola-red font-light"
+                  />
 
                   <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
                     Sign Up

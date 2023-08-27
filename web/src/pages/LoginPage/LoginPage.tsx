@@ -61,14 +61,14 @@ const LoginPage = () => {
                   <Label
                     name="username"
                     className="text-night font-archivo"
-                    errorClassName="text-red-500"
+                    errorClassName="font-archivo text-night mt-4 mb-1"
                   >
                     Username
                   </Label>
                   <TextField
                     name="username"
                     className="text-night p-2 rounded bg-gray-100"
-                    errorClassName="rw-input rw-input-error"
+                    errorClassName="text-night p-2 rounded bg-red-100"
                     ref={usernameRef}
                     validation={{
                       required: {
@@ -78,19 +78,22 @@ const LoginPage = () => {
                     }}
                   />
 
-                  <FieldError name="username" className="rw-field-error" />
+                  <FieldError
+                    name="username"
+                    className="text-crayola-red font-light"
+                  />
 
                   <Label
                     name="password"
                     className="font-archivo text-night mt-4 mb-1"
-                    errorClassName="text-red-500"
+                    errorClassName="font-archivo text-night mt-4 mb-1"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
                     className="text-night p-2 rounded bg-gray-100"
-                    errorClassName="rw-input rw-input-error"
+                    errorClassName="text-night p-2 rounded bg-red-100"
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -107,7 +110,10 @@ const LoginPage = () => {
                     Forgot Password?
                   </Link>
 
-                  <FieldError name="password" className="rw-field-error" />
+                  <FieldError
+                    name="password"
+                    className="text-crayola-red font-light"
+                  />
 
                   <Submit className="text-white font-archivo font-bold text-center from-crayola-red to-majorelle-blue p-2 rounded bg-gradient-to-br flex items-center justify-center mt-4 mb-4">
                     Login
