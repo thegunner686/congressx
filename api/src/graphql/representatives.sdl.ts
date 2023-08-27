@@ -13,7 +13,7 @@ export const schema = gql`
   type Query {
     representatives: [Representative!]! @requireAuth
     representative(id: String!): Representative @requireAuth
-    populateRepresentatives: [Representative]
+    populateRepresentatives: [Representative] @requireAuth
   }
 
   input CreateRepresentativeInput {
