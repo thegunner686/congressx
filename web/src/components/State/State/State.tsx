@@ -1,17 +1,17 @@
-import { Link, routes, navigate } from "@redwoodjs/router";
-import { useMutation } from "@redwoodjs/web";
-import { toast } from "@redwoodjs/web/toast";
+// import { Link, routes, navigate } from "@redwoodjs/router";
+// import { useMutation } from "@redwoodjs/web";
+// import { toast } from "@redwoodjs/web/toast";
 
+import { useMutation } from "@redwoodjs/web";
+import { useCallback, useState } from "react";
+import { useUserContext } from "src/contexts/UserContext";
 import {} from "src/lib/formatters";
 
-import type {
-  DeleteStateMutationVariables,
-  FindStateById,
-} from "types/graphql";
+import type { FindStateById } from "types/graphql";
 
-const DELETE_STATE_MUTATION = gql`
-  mutation DeleteStateMutation($id: String!) {
-    deleteState(id: $id) {
+const update_user = gql`
+  mutation UpdateUserById($id: String!, $input: UpdateUserInput!) {
+    updateUser(id: $id, input: $input) {
       id
     }
   }
@@ -22,67 +22,64 @@ interface Props {
 }
 
 const State = ({ state }: Props) => {
-  const [deleteState] = useMutation(DELETE_STATE_MUTATION, {
-    onCompleted: () => {
-      toast.success("State deleted");
-      navigate(routes.states());
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
+  const user = useUserContext();
+  const [updateUser] = useMutation(update_user, {
+    refetchQueries: ["FindUserById"],
   });
+  const [loading, setLoading] = useState(false);
 
-  const onDeleteClick = (id: DeleteStateMutationVariables["id"]) => {
-    if (confirm("Are you sure you want to delete state " + id + "?")) {
-      deleteState({ variables: { id } });
+  const onClick = useCallback(async () => {
+    console.log(user);
+    if (!user) return;
+    setLoading(true);
+
+    if (user.state) {
+      await updateUser({
+        variables: {
+          id: user.id,
+          input: {
+            state: null,
+          },
+        },
+      });
+    } else {
+      await updateUser({
+        variables: {
+          id: user.id,
+          input: {
+            state: state.id,
+          },
+        },
+      });
     }
-  };
+    setLoading(false);
+  }, [user]);
+
+  const hoverClasses = user?.state
+    ? ""
+    : "hover:border-4 hover:border-verdigris hover:rounded-lg hover:shadow-verdigris";
 
   return (
-    <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            State {state.id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
-          <tbody>
-            <tr>
-              <th>Id</th>
-              <td>{state.id}</td>
-            </tr>
-            <tr>
-              <th>Name</th>
-              <td>{state.name}</td>
-            </tr>
-            <tr>
-              <th>Abbreviation</th>
-              <td>{state.abbreviation}</td>
-            </tr>
-            <tr>
-              <th>Image url</th>
-              <td>{state.imageUrl}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editState({ id: state.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(state.id)}
-        >
-          Delete
-        </button>
-      </nav>
-    </>
+    <button
+      className={`${
+        loading ? "animate-pulse" : ""
+      } w-96 h-48 relative flex flex-col items-center justify-center cursor-pointer shadow-lg shadow-gray-400 rounded ${hoverClasses} mb-8 transition-all group hover:scale-95`}
+      onClick={onClick}
+      disabled={loading}
+    >
+      <img
+        src={state.imageUrl}
+        className=" w-full h-full object-cover absolute top-0 left-0 rounded"
+      />
+      <h1 className="relative font-anton uppercase text-white font-extrabold text-5xl text-shadow shadow-gray-500">
+        {state.name}
+      </h1>
+      {user?.state ? (
+        <div className="p-1 pl-4 pr-4 border border-white text-white relative rounded group-hover:border-verdigris group-hover:bg-verdigris group-hover:text-white group-hover:bg-opacity-50 top-4 transition-all">
+          Change State
+        </div>
+      ) : null}
+    </button>
   );
 };
 

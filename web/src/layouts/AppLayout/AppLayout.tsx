@@ -1,5 +1,7 @@
 import { useUserContext } from "src/contexts/UserContext";
 import { Link, routes } from "@redwoodjs/router";
+import MiniStateCell from "src/components/State/MiniStateCell";
+import { useAuth } from "src/auth";
 
 type AppLayoutProps = {
   children?: React.ReactNode;
@@ -7,20 +9,23 @@ type AppLayoutProps = {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const user = useUserContext();
+  const { logOut } = useAuth();
 
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen">
       <nav className="w-full h-32 flex items-center justify-center">
-        <div className="w-9/12 h-16 rounded bg-white shadow-gray-200 shadow fixed z-50">
+        <div className="w-9/12 h-16 rounded bg-white shadow-gray-200 shadow fixed z-50 flex flex-row items-center p-4">
           {user?.state ? (
-            <div>State: {user.state}</div>
+            <MiniStateCell id={user.state} />
           ) : (
             <Link
-              className="border-2 border-crayola-red rounded shadow shadow-gray-200 p-1 pl-2 pr-2 flex flex-row items-center justify-center hover:bg-crayola-red hover:text-white text-crayola-red w-36"
+              className="border border-crayola-red rounded shadow shadow-gray-200 p-1 pl-2 pr-2 flex flex-row items-center justify-center hover:bg-crayola-red hover:text-white text-crayola-red w-36 transition-all"
               to={routes.stateSelection()}
             >
               <span className={`material-icons font-extrabold`}>map</span>
-              <p className="font-archivo text-sm font-light">Select State</p>
+              <p className="font-archivo text-sm font-light ml-1">
+                Select State
+              </p>
             </Link>
           )}
         </div>
