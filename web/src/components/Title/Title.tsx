@@ -21,11 +21,6 @@ const Title: React.FC<TitleProps> = ({ size = "lg", className }) => {
     <div
       className={`flex-row font-extrabold uppercase text-white shadow-silver text-shadow-sm flex items-center justify-center font-archivo text-center ${titleClassName} ${className}`}
     >
-      <span
-        className={`material-icons font-extrabold ${iconClassName} ${className}`}
-      >
-        account_balance
-      </span>
       CongressX
     </div>
   );

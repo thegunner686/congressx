@@ -19,49 +19,6 @@ import AppLayout from "./layouts/AppLayout/AppLayout";
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Set
-        wrap={ScaffoldLayout}
-        title="States"
-        titleTo="states"
-        buttonLabel="New State"
-        buttonTo="newState"
-      >
-        <Route
-          path="/states/{id}/edit"
-          page={StateEditStatePage}
-          name="editState"
-        />
-      </Set>
-      <Set
-        wrap={ScaffoldLayout}
-        title="Users"
-        titleTo="users"
-        buttonLabel="New User"
-        buttonTo="newUser"
-      >
-        <Route
-          path="/users/{id}/edit"
-          page={UserEditUserPage}
-          name="editUser"
-        />
-        <Route path="/users/{id}" page={UserUserPage} name="user" />
-      </Set>
-      <Set
-        wrap={ScaffoldLayout}
-        title="States"
-        titleTo="states"
-        buttonLabel="New State"
-        buttonTo="newState"
-      >
-        <Route path="/states/new" page={StateNewStatePage} name="newState" />
-        <Route
-          path="/states/{id}/edit"
-          page={StateEditStatePage}
-          name="editState"
-        />
-        <Route path="/states/{id}" page={StateStatePage} name="state" />
-        <Route path="/states" page={StateStatesPage} name="states" />
-      </Set>
       <Set wrap={AuthLayout}>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />

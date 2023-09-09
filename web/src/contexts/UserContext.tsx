@@ -31,6 +31,7 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState<User>(data?.user);
 
   useEffect(() => {
+    console.log({ user });
     setUser(data?.user);
   }, [data]);
 

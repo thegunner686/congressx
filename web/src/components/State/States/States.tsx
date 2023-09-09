@@ -6,6 +6,7 @@ import { QUERY } from "src/components/State/StatesCell";
 import { truncate } from "src/lib/formatters";
 
 import type { DeleteStateMutationVariables, FindStates } from "types/graphql";
+import State from "../State/State";
 
 const DELETE_STATE_MUTATION = gql`
   mutation DeleteStateMutation($id: String!) {
@@ -30,60 +31,12 @@ const StatesList = ({ states }: FindStates) => {
     awaitRefetchQueries: true,
   });
 
-  const onDeleteClick = (id: DeleteStateMutationVariables["id"]) => {
-    if (confirm("Are you sure you want to delete state " + id + "?")) {
-      deleteState({ variables: { id } });
-    }
-  };
-
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Image url</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {states.map((state) => (
-            <tr key={state.id}>
-              <td>{truncate(state.id)}</td>
-              <td>{truncate(state.name)}</td>
-              <td>{truncate(state.imageUrl)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.state({ id: state.id })}
-                    title={"Show state " + state.id + " detail"}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editState({ id: state.id })}
-                    title={"Edit state " + state.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={"Delete state " + state.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(state.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      {states.map((state) => (
+        <State key={state.id} state={state} />
+      ))}
+    </>
   );
 };
 

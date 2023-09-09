@@ -6,4 +6,11 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background-color: black;
+}
+
+.home-background {
+  background: url("/CongressX_Logo_large.png");
+  background-size: cover;
+  background-repreat: no-repeat;
 }

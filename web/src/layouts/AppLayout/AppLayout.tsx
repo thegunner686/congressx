@@ -14,8 +14,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen">
-      <nav className="w-full h-32 flex items-center justify-center">
-        <div className="w-9/12 h-16 rounded bg-white shadow-gray-200 shadow fixed z-50 flex flex-row items-center p-4"></div>
+      <nav className="w-full h-24 flex items-center justify-center bg-red-200">
+        <div onClick={logOut}>
+          {/* <div>{user.name}</div> */}
+          logout
+        </div>
+        <div>{user?.name ?? "helo"}</div>
       </nav>
       <div className="flex-grow flex flex-row items-start justify-center w-full min-h-full">
         <section className="flex-1 flex items-center justify-center">
