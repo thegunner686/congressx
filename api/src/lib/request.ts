@@ -35,3 +35,20 @@ export const url_builder = (base: string, params: QueryParam[]) => {
 export const build_request_url = (base_url: string) => {
   return url_builder(base_url, []);
 };
+
+export const build_congress_request = () => {
+  return build_request_url("https://api.congress.gov")
+    .extend("v3")
+    .query_param("format", "json");
+};
+
+export const fetch_congress_api = async (request) => {
+  const res = await fetch(request.done(), {
+    method: "GET",
+    headers: {
+      "X-Api-Key": process.env.CONGRESS_API_KEY,
+    },
+  });
+
+  return res.json();
+};

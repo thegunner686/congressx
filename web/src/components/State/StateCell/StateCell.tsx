@@ -9,7 +9,6 @@ export const QUERY = gql`
     state: state(id: $id) {
       id
       name
-      abbreviation
       imageUrl
     }
   }

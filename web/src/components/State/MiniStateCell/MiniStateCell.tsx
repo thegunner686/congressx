@@ -2,17 +2,9 @@ import type { FindStateById } from "types/graphql";
 
 import type { CellSuccessProps, CellFailureProps } from "@redwoodjs/web";
 import MiniState from "../MiniState/MiniState";
+import { QUERY } from "../StateCell";
 
-export const QUERY = gql`
-  query FindStateById($id: String!) {
-    state: state(id: $id) {
-      id
-      name
-      abbreviation
-      imageUrl
-    }
-  }
-`;
+QUERY;
 
 export const Loading = () => <div>Loading...</div>;
 

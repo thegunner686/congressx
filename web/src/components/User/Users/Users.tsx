@@ -44,8 +44,8 @@ const UsersList = ({ users }: FindUsers) => {
             <th>Id</th>
             <th>Email</th>
             <th>Name</th>
-            <th>State</th>
-            <th>District</th>
+            <th>State id</th>
+            <th>District id</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -55,8 +55,8 @@ const UsersList = ({ users }: FindUsers) => {
               <td>{truncate(user.id)}</td>
               <td>{truncate(user.email)}</td>
               <td>{truncate(user.name)}</td>
-              <td>{truncate(user.state)}</td>
-              <td>{truncate(user.district)}</td>
+              <td>{truncate(user.stateId)}</td>
+              <td>{truncate(user.districtId)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

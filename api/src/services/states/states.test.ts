@@ -24,17 +24,11 @@ describe("states", () => {
 
   scenario("creates a state", async () => {
     const result = await createState({
-      input: {
-        id: "String",
-        name: "String",
-        abbreviation: "String",
-        imageUrl: "String",
-      },
+      input: { id: "String", name: "String", imageUrl: "String" },
     });
 
     expect(result.id).toEqual("String");
     expect(result.name).toEqual("String");
-    expect(result.abbreviation).toEqual("String");
     expect(result.imageUrl).toEqual("String");
   });
 

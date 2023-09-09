@@ -12,7 +12,6 @@ export const QUERY = gql`
     state: state(id: $id) {
       id
       name
-      abbreviation
       imageUrl
     }
   }
@@ -22,7 +21,6 @@ const UPDATE_STATE_MUTATION = gql`
     updateState(id: $id, input: $input) {
       id
       name
-      abbreviation
       imageUrl
     }
   }

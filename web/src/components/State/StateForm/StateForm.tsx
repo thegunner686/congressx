@@ -53,24 +53,6 @@ const StateForm = (props: StateFormProps) => {
         <FieldError name="name" className="rw-field-error" />
 
         <Label
-          name="abbreviation"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Abbreviation
-        </Label>
-
-        <TextField
-          name="abbreviation"
-          defaultValue={props.state?.abbreviation}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="abbreviation" className="rw-field-error" />
-
-        <Label
           name="imageUrl"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

@@ -1,4 +1,8 @@
-import type { QueryResolvers, MutationResolvers } from "types/graphql";
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  StateRelationResolvers,
+} from "types/graphql";
 
 import { db } from "src/lib/db";
 
@@ -32,4 +36,19 @@ export const deleteState: MutationResolvers["deleteState"] = ({ id }) => {
   return db.state.delete({
     where: { id },
   });
+};
+
+export const State: StateRelationResolvers = {
+  representatives: (_obj, { root }) => {
+    return db.state.findUnique({ where: { id: root?.id } }).representatives();
+  },
+  residents: (_obj, { root }) => {
+    return db.state.findUnique({ where: { id: root?.id } }).residents();
+  },
+  districts: (_obj, { root }) => {
+    return db.state.findUnique({ where: { id: root?.id } }).districts();
+  },
+  polls: (_obj, { root }) => {
+    return db.state.findUnique({ where: { id: root?.id } }).polls();
+  },
 };

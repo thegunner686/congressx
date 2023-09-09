@@ -10,18 +10,22 @@ export const QUERY = gql`
     states {
       id
       name
-      abbreviation
       imageUrl
     }
   }
 `;
 
-export const Loading = () => (
-  <div className="w-96 h-48 bg-gray-200 shadow-gray-100 shadow rounded animate-pulse"></div>
-);
+export const Loading = () => <div>Loading...</div>;
 
 export const Empty = () => {
-  return <></>;
+  return (
+    <div className="rw-text-center">
+      {"No states yet. "}
+      <Link to={routes.newState()} className="rw-link">
+        {"Create one?"}
+      </Link>
+    </div>
+  );
 };
 
 export const Failure = ({ error }: CellFailureProps) => (

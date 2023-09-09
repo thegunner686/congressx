@@ -11,8 +11,12 @@ export const GET_USER = gql`
       id
       email
       name
-      state
-      district
+      state {
+        name
+      }
+      district {
+        number
+      }
     }
   }
 `;

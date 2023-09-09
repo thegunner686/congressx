@@ -6,7 +6,13 @@ import UserForm from "src/components/User/UserForm";
 
 import type { CreateUserInput } from "types/graphql";
 
-import { CREATE_USER_MUTATION } from "src/pages/SignupPage/SignupPage";
+const CREATE_USER_MUTATION = gql`
+  mutation CreateUserMutationScaffolded($input: CreateUserInput!) {
+    createUser(input: $input) {
+      id
+    }
+  }
+`;
 
 const NewUser = () => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER_MUTATION, {

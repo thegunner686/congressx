@@ -26,14 +26,11 @@ const Routes = () => {
         buttonLabel="New State"
         buttonTo="newState"
       >
-        <Route path="/states/new" page={StateNewStatePage} name="newState" />
         <Route
           path="/states/{id}/edit"
           page={StateEditStatePage}
           name="editState"
         />
-        <Route path="/states/{id}" page={StateStatePage} name="state" />
-        <Route path="/states" page={StateStatesPage} name="states" />
       </Set>
       <Set
         wrap={ScaffoldLayout}
@@ -42,14 +39,28 @@ const Routes = () => {
         buttonLabel="New User"
         buttonTo="newUser"
       >
-        <Route path="/users/new" page={UserNewUserPage} name="newUser" />
         <Route
-          path="/users/{id:Int}/edit"
+          path="/users/{id}/edit"
           page={UserEditUserPage}
           name="editUser"
         />
-        <Route path="/users/{id:Int}" page={UserUserPage} name="user" />
-        <Route path="/users" page={UserUsersPage} name="users" />
+        <Route path="/users/{id}" page={UserUserPage} name="user" />
+      </Set>
+      <Set
+        wrap={ScaffoldLayout}
+        title="States"
+        titleTo="states"
+        buttonLabel="New State"
+        buttonTo="newState"
+      >
+        <Route path="/states/new" page={StateNewStatePage} name="newState" />
+        <Route
+          path="/states/{id}/edit"
+          page={StateEditStatePage}
+          name="editState"
+        />
+        <Route path="/states/{id}" page={StateStatePage} name="state" />
+        <Route path="/states" page={StateStatesPage} name="states" />
       </Set>
       <Set wrap={AuthLayout}>
         <Route path="/login" page={LoginPage} name="login" />

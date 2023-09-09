@@ -13,8 +13,8 @@ export const QUERY = gql`
       id
       email
       name
-      state
-      district
+      stateId
+      districtId
     }
   }
 `;
@@ -24,8 +24,8 @@ const UPDATE_USER_MUTATION = gql`
       id
       email
       name
-      state
-      district
+      stateId
+      districtId
     }
   }
 `;

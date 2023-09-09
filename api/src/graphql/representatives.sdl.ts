@@ -1,40 +1,54 @@
 export const schema = gql`
   type Representative {
     id: String!
+    birthYear: Int!
     imageUrl: String!
+    honorificName: String!
+    directOrderName: String!
+    firstName: String!
+    lastName: String!
     invertedOrderName: String!
-    partyName: String!
-    startYear: Int!
-    state: String!
-    district: Int
-    currentChamber: String!
+    leadership: [Leadership]!
+    partyHistory: [PartyAffiliation]!
+    active: Boolean!
+    terms: [Term]!
+    state: State
+    stateId: String
+    constituents: [User]!
+    district: District
+    votes: [RepresentativeVote]!
+    sponsoredBills: [Bill]!
+    cosponsoredBills: [Bill]!
+    congresses: [Congress]!
   }
 
   type Query {
     representatives: [Representative!]! @requireAuth
     representative(id: String!): Representative @requireAuth
-    populateRepresentatives: [Representative] @requireAuth
   }
 
   input CreateRepresentativeInput {
-    id: String!
+    birthYear: Int!
     imageUrl: String!
+    honorificName: String!
+    directOrderName: String!
+    firstName: String!
+    lastName: String!
     invertedOrderName: String!
-    partyName: String!
-    startYear: Int!
-    state: String!
-    district: Int
-    currentChamber: String!
+    active: Boolean!
+    stateId: String
   }
 
   input UpdateRepresentativeInput {
+    birthYear: Int
     imageUrl: String
+    honorificName: String
+    directOrderName: String
+    firstName: String
+    lastName: String
     invertedOrderName: String
-    partyName: String
-    startYear: Int
-    state: String
-    district: Int
-    currentChamber: String
+    active: Boolean
+    stateId: String
   }
 
   type Mutation {

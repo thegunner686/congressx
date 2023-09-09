@@ -58,12 +58,12 @@ const User = ({ user }: Props) => {
               <td>{user.name}</td>
             </tr>
             <tr>
-              <th>State</th>
-              <td>{user.state}</td>
+              <th>State id</th>
+              <td>{user.stateId}</td>
             </tr>
             <tr>
-              <th>District</th>
-              <td>{user.district}</td>
+              <th>District id</th>
+              <td>{user.districtId}</td>
             </tr>
           </tbody>
         </table>

@@ -1,6 +1,7 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
@@ -12,24 +13,238 @@ model User {
   id    String  @id @default(uuid())
   email String  @unique
   name  String?
-  state String?
-  district Int?
-}
-
-model Representative {
-  id String @id @default(uuid())
-  imageUrl String
-  invertedOrderName String
-  partyName String
-  startYear Int
-  state String
-  district Int?
-  currentChamber String
+  state State? @relation(fields: [stateId], references: [id])
+  stateId String?
+  representatives Representative[]
+  district District? @relation(fields: [stateId, districtNumber], references: [stateId, number])
+  districtNumber Int?
+  votes Vote[]
+  comments Comment[]
+  polls Poll[]
 }
 
 model State {
   id String @id
   name String
-  abbreviation String
   imageUrl String
+  representatives Representative[]
+  residents User[]
+  districts District[]
+  polls Poll[]
+  terms Term[]
+}
+
+model District {
+  id String @id @default(uuid())
+  state State? @relation(fields: [stateId], references: [id])
+  stateId String
+  number Int
+  representative Representative? @relation(fields: [representativeId], references: [id])
+  representativeId String @unique
+  residents User[]
+  polls Poll[]
+  @@unique([stateId, number])
+  @@index([stateId, number])
+}
+
+model Representative {
+  id String @id @default(uuid())
+  birthYear Int?
+  imageUrl String?
+  honorificName String?
+  directOrderName String?
+  firstName String
+  lastName String
+  invertedOrderName String
+  leadership Leadership[]
+  partyHistory PartyAffiliation[]
+  active Boolean
+  terms Term[]
+  state State? @relation(fields: [stateId], references: [id])
+  stateId String?
+  constituents User[]
+  district District?
+  votes RepresentativeVote[]
+  sponsoredBills Bill[] @relation("SponsoredBills")
+  cosponsoredBills Bill[] @relation("CosponsoredBills")
+  congresses Congress[]
+}
+
+model Leadership {
+  id String @id @default(uuid())
+  representative Representative @relation(fields: [representativeId], references: [id])
+  representativeId String
+  congress Congress? @relation(fields: [congressNumber], references: [number])
+  congressNumber Int
+  type String
+}
+
+model PartyAffiliation {
+  id String @id @default(uuid())
+  representative Representative @relation(fields: [representativeId], references: [id])
+  representativeId String
+  party Party? @relation(fields: [partyName], references: [name])
+  partyName String
+  startYear Int
+  @@unique([representativeId, partyName, startYear])
+  @@index([representativeId, partyName, startYear])
+}
+
+model Party {
+  name String @id
+  abbreviation String
+  affiliations PartyAffiliation[]
+}
+
+model Term {
+  id String @id @default(uuid())
+  chamber String
+  congress Congress? @relation(fields: [congressNumber], references: [number])
+  congressNumber Int
+  memberType String
+  startYear Int
+  endYear Int?
+  representative Representative? @relation(fields: [representativeId], references: [id])
+  representativeId String
+  state State? @relation(fields: [stateId], references: [id])
+  stateId String
+}
+
+model Congress {
+  number Int @id
+  name String
+  startYear Int
+  endYear Int
+  sessions Session[]
+  members Representative[]
+  bills Bill[]
+  leadership Leadership[]
+  terms Term[]
+}
+
+model Session {
+  id String @id @default(uuid())
+  congress Congress? @relation(fields: [congressNumber], references: [number])
+  congressNumber Int
+  chamber String
+  startDate DateTime?
+  endDate DateTime?
+  type String
+  number Int
+  @@unique([congressNumber, chamber, number, type])
+  @@index([congressNumber, chamber, number, type])
+}
+
+model Bill {
+  id String @id
+  title String
+  introducedDate DateTime
+  congress Congress? @relation(fields: [congressNumber], references: [number])
+  congressNumber Int
+  originChamber String
+  type String
+  number Int
+  userVotes Vote[]
+  votings Voting[]
+  actions BillAction[]
+  summaries BillSummary[]
+  textVersions BillTextVersion[]
+  legislativeSubjects BillSubject[]
+  sponsors Representative[] @relation("SponsoredBills")
+  cosponsors Representative[] @relation("CosponsoredBills")
+  comments Comment[]
+}
+
+model BillAction {
+  id String @id @default(uuid())
+  code String
+  date DateTime
+  text String
+  type String
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String
+}
+
+model BillTextVersion {
+  id String @id @default(uuid())
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String
+  date DateTime?
+  htmlUrl String?
+  pdfUrl String?
+}
+
+model BillSubject {
+  id String @id @default(uuid())
+  name String
+  bills Bill[]
+  type String
+}
+
+model BillSummary {
+  id String @id @default(uuid())
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String
+  actionDate DateTime
+  actionDescription String
+  text String
+  updateDate DateTime
+}
+
+model Voting {
+  id String @id
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String
+  votes RepresentativeVote[]
+  congress Int
+  session String
+  rollCallNumber Int
+  status String
+  type String
+}
+
+model RepresentativeVote {
+  id String @id
+  voting Voting? @relation(fields: [votingId], references: [id])
+  votingId String
+  representative Representative? @relation(fields: [representativeId], references: [id])
+  representativeId String
+  result String
+}
+
+model Vote {
+  id String @id @default(uuid())
+  user User? @relation(fields: [userId], references: [id])
+  userId String
+  result String
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String?
+  poll Poll? @relation(fields: [pollId], references: [id])
+  pollId String?
+}
+
+model Comment {
+  id String @id @default(uuid())
+  user User? @relation(fields: [userId], references: [id])
+  userId String
+  text String
+  bill Bill? @relation(fields: [billId], references: [id])
+  billId String?
+  poll Poll? @relation(fields: [pollId], references: [id])
+  pollId String?
+}
+
+model Poll {
+  id String @id @default(uuid())
+  title String
+  text String
+  state State? @relation(fields: [stateId], references: [id])
+  stateId String
+  district District? @relation(fields: [stateId, districtNumber], references: [stateId, number])
+  districtNumber Int?
+  createdBy User? @relation(fields: [userId], references: [id])
+  userId String
+  comments Comment[]
+  votes Vote[]
+  createdOn DateTime
 }

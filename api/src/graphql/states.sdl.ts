@@ -2,8 +2,11 @@ export const schema = gql`
   type State {
     id: String!
     name: String!
-    abbreviation: String!
     imageUrl: String!
+    representatives: [Representative]!
+    residents: [User]!
+    districts: [District]!
+    polls: [Poll]!
   }
 
   type Query {
@@ -13,13 +16,11 @@ export const schema = gql`
 
   input CreateStateInput {
     name: String!
-    abbreviation: String!
     imageUrl: String!
   }
 
   input UpdateStateInput {
     name: String
-    abbreviation: String
     imageUrl: String
   }
 

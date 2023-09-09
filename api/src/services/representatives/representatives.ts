@@ -1,10 +1,10 @@
-import type { QueryResolvers, MutationResolvers } from "types/graphql";
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  RepresentativeRelationResolvers,
+} from "types/graphql";
 
 import { db } from "src/lib/db";
-import {
-  getAllRepresentatives,
-  getStartYearAndChamber,
-} from "src/lib/congress-api";
 
 export const representatives: QueryResolvers["representatives"] = () => {
   return db.representative.findMany();
@@ -38,30 +38,47 @@ export const deleteRepresentative: MutationResolvers["deleteRepresentative"] =
     });
   };
 
-export const populateRepresentatives = async () => {
-  const representatives = await getAllRepresentatives();
-
-  return representatives
-    .map((rep) => {
-      const { inactive, startYear, chamber } = getStartYearAndChamber(rep);
-      return {
-        rep,
-        inactive,
-        startYear,
-        chamber,
-      };
-    })
-    .filter(({ inactive }) => !inactive)
-    .map(({ rep, startYear, chamber }) => {
-      return {
-        id: rep.bioguideId,
-        imageUrl: rep.depiction?.imageUrl ?? "",
-        invertedOrderName: rep.name,
-        partyName: rep.partyName,
-        startYear,
-        state: rep.state,
-        district: rep.district,
-        currentChamber: chamber,
-      };
-    });
+export const Representative: RepresentativeRelationResolvers = {
+  leadership: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .leadership();
+  },
+  partyHistory: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .partyHistory();
+  },
+  terms: (_obj, { root }) => {
+    return db.representative.findUnique({ where: { id: root?.id } }).terms();
+  },
+  state: (_obj, { root }) => {
+    return db.representative.findUnique({ where: { id: root?.id } }).state();
+  },
+  constituents: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .constituents();
+  },
+  district: (_obj, { root }) => {
+    return db.representative.findUnique({ where: { id: root?.id } }).district();
+  },
+  votes: (_obj, { root }) => {
+    return db.representative.findUnique({ where: { id: root?.id } }).votes();
+  },
+  sponsoredBills: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .sponsoredBills();
+  },
+  cosponsoredBills: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .cosponsoredBills();
+  },
+  congresses: (_obj, { root }) => {
+    return db.representative
+      .findUnique({ where: { id: root?.id } })
+      .congresses();
+  },
 };

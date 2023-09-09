@@ -3,22 +3,8 @@ import type { ScenarioData } from "@redwoodjs/testing/api";
 
 export const standard = defineScenario<Prisma.StateCreateArgs>({
   state: {
-    one: {
-      data: {
-        id: "String",
-        name: "String",
-        abbreviation: "String",
-        imageUrl: "String",
-      },
-    },
-    two: {
-      data: {
-        id: "String",
-        name: "String",
-        abbreviation: "String",
-        imageUrl: "String",
-      },
-    },
+    one: { data: { id: "String", name: "String", imageUrl: "String" } },
+    two: { data: { id: "String", name: "String", imageUrl: "String" } },
   },
 });
 

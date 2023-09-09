@@ -3,8 +3,14 @@ export const schema = gql`
     id: String!
     email: String!
     name: String
-    state: String
-    district: Int
+    state: State
+    stateId: String
+    representatives: [Representative]!
+    district: District
+    districtId: String
+    votes: [Vote]!
+    comments: [Comment]!
+    polls: [Poll]!
   }
 
   type Query {
@@ -13,18 +19,17 @@ export const schema = gql`
   }
 
   input CreateUserInput {
-    id: String!
     email: String!
     name: String
-    state: String
-    district: Int
+    stateId: String
+    districtId: String
   }
 
   input UpdateUserInput {
     email: String
     name: String
-    state: String
-    district: Int
+    stateId: String
+    districtId: String
   }
 
   type Mutation {

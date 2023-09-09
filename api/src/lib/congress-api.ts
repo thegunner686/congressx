@@ -15,8 +15,6 @@ export const getRepresentativesBatch = async (
 
   const url = request.done();
 
-  console.log({ url });
-
   const response = await fetch(url, {
     method: "GET",
     headers: {

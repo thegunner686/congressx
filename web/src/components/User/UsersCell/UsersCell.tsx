@@ -11,8 +11,8 @@ export const QUERY = gql`
       id
       email
       name
-      state
-      district
+      stateId
+      districtId
     }
   }
 `;
