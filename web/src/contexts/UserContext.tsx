@@ -11,8 +11,10 @@ export const GET_USER = gql`
       id
       email
       name
+      stateId
       state {
         name
+        imageUrl
       }
       district {
         number

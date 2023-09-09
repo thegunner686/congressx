@@ -3,15 +3,32 @@ import { Link, routes } from "@redwoodjs/router";
 import MiniStateCell from "src/components/State/MiniStateCell";
 import { useAuth } from "src/auth";
 import Title from "src/components/Title/Title";
+import { useEffect, useRef, useState } from "react";
 
 type AppLayoutProps = {
   children?: React.ReactNode;
 };
 
+const DEFAULT_BG_URL = "/CongressX_Logo_large.png";
+const defaultBgClassName =
+  "bg-cover bg-no-repeat w-screen max-h-screen animate-fade-in transition-all flex-grow overflow-y-scroll";
+
 const AppLayout = ({ children }: AppLayoutProps) => {
   const user = useUserContext();
-
   const { logOut } = useAuth();
+  const ref = useRef(null);
+
+  const [bgClassName, setBgClassName] = useState(defaultBgClassName);
+
+  useEffect(() => {
+    if (user?.stateId && user?.state) {
+      setBgClassName(
+        `${defaultBgClassName} bg-[url('${user.state.imageUrl}')]`,
+      );
+    } else {
+      setBgClassName(`${defaultBgClassName} bg-[url('${DEFAULT_BG_URL}')]`);
+    }
+  }, [user?.stateId, user?.state]);
 
   return (
     <div className="flex flex-col items-center justify-start w-screen h-screen">
@@ -65,8 +82,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           </div>
         </div>
       </nav>
-      <main className="home-background w-screen max-h-screen animate-fade-in transition-all flex-grow">
-        <div className="w-full flex items-center max-h-full flex-col backdrop-blur-sm bg-opacity-40 bg-night overflow-y-scroll">
+      <main className={bgClassName} ref={ref}>
+        <div className="w-full flex items-center min-h-full flex-col backdrop-blur-sm bg-opacity-40 bg-night overflow-y-scroll">
           {children}
         </div>
       </main>

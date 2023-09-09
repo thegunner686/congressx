@@ -35,7 +35,7 @@ const State = ({ state }: Props) => {
         variables: {
           id: user.id,
           input: {
-            state: null,
+            stateId: null,
           },
         },
       });
@@ -44,7 +44,7 @@ const State = ({ state }: Props) => {
         variables: {
           id: user.id,
           input: {
-            state: state.id,
+            stateId: state.id,
           },
         },
       });
