@@ -32,11 +32,13 @@ const StatesList = ({ states }: FindStates) => {
   });
 
   return (
-    <>
-      {states.map((state) => (
-        <State key={state.id} state={state} />
-      ))}
-    </>
+    <section className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      {[...states]
+        .sort((s1, s2) => s1.name.localeCompare(s2.name))
+        .map((state) => (
+          <State key={state.id} state={state} />
+        ))}
+    </section>
   );
 };
 

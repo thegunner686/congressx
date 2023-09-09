@@ -10,7 +10,7 @@ const StateSelectionPage = () => {
     <>
       <MetaTags title="StateSelection" description="StateSelection page" />
       <main className="flex flex-col items-center">
-        {user?.state ? <StateCell id={user.state} /> : <StatesCell />}
+        {user?.state ? <StateCell id={user.stateId} /> : <StatesCell />}
       </main>
     </>
   );

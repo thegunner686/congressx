@@ -60,13 +60,14 @@ const State = ({ state }: Props) => {
     <button
       className={`${
         loading ? "animate-pulse" : ""
-      } w-96 h-48 relative flex flex-col items-center justify-center cursor-pointer shadow-lg shadow-gray-400 rounded ${hoverClasses} mb-8 transition-all group hover:scale-95`}
+      } lg:w-96 lg:h-48 w-72 h-36 relative flex flex-col items-center justify-center cursor-pointer shadow-lg shadow-gray-800 rounded ${hoverClasses} mb-8 transition-all group hover:scale-95`}
       onClick={onClick}
       disabled={loading}
     >
       <img
         src={state.imageUrl}
         className=" w-full h-full object-cover absolute top-0 left-0 rounded"
+        loading="lazy"
       />
       <h1 className="relative font-anton uppercase text-white font-extrabold text-5xl text-shadow shadow-gray-500">
         {state.name}

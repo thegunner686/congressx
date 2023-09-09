@@ -2,6 +2,7 @@ import { useUserContext } from "src/contexts/UserContext";
 import { Link, routes } from "@redwoodjs/router";
 import MiniStateCell from "src/components/State/MiniStateCell";
 import { useAuth } from "src/auth";
+import Title from "src/components/Title/Title";
 
 type AppLayoutProps = {
   children?: React.ReactNode;
@@ -13,37 +14,75 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const { logOut } = useAuth();
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-screen">
-      <nav className="w-full h-24 flex items-center justify-center bg-red-200">
-        <div onClick={logOut}>
-          {/* <div>{user.name}</div> */}
-          logout
+    <div className="flex flex-col items-center justify-start w-screen h-screen">
+      <nav className="w-full h-24 flex items-center justify-between">
+        <div className="flex-shrink flex items-center justify-center h-full p-2">
+          <Title size="sm" />
         </div>
-        <div>{user?.name ?? "helo"}</div>
-      </nav>
-      <div className="flex-grow flex flex-row items-start justify-center w-full min-h-full">
-        <section className="flex-1 flex items-center justify-center">
-          <div className=" w-60 h-96 shadow shadow-silver rounded flex flex-col items-center pt-4">
-            {user?.state ? (
-              <MiniStateCell id={user.state} />
-            ) : (
-              <Link
-                className="border border-crayola-red rounded shadow shadow-gray-200 p-1 pl-2 pr-2 flex flex-row items-center justify-center hover:bg-crayola-red hover:text-white text-crayola-red w-36 transition-all"
-                to={routes.stateSelection()}
-              >
-                <span className={`material-icons font-extrabold`}>map</span>
-                <p className="font-archivo text-sm font-light ml-1">
-                  Select State
-                </p>
-              </Link>
-            )}
+        <div className="flex flex-grow items-center justify-between bg-night p-2">
+          <div className="flex-grow flex flex-row items-center justify-start">
+            <Link
+              to={routes.stateSelection()}
+              className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Vote
+            </Link>
+            <Link
+              to={routes.stateSelection()}
+              className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Petitions
+            </Link>
+            <Link
+              to={routes.stateSelection()}
+              className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Your Representatives
+            </Link>
           </div>
-        </section>
-        <div className="flex-[2]">{children}</div>
-        <section className="flex-1 bg-blue-100 h-full"></section>
-      </div>
+          <div className="flex-shrink flex items-center justify-center">
+            <Link
+              to={routes.stateSelection()}
+              className="w-auto px-4 h-10 flex items-center justify-center text-zinc-500 font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Change State
+            </Link>
+            <Link
+              to={routes.stateSelection()}
+              className="w-auto px-4 h-10 flex items-center justify-center text-zinc-500 font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Contact
+            </Link>
+            <div
+              onClick={logOut}
+              className="w-auto px-4 h-10 flex items-center justify-center text-zinc-500 font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
+            >
+              Log Out
+            </div>
+            <div className="text-white rounded-full w-8 h-8 bg-majorelle-blue bg-opacity-50 font-archivo text-xs flex items-center justify-center">
+              {getInitials(user?.name ?? "")}
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main className="home-background w-screen max-h-screen animate-fade-in transition-all flex-grow">
+        <div className="w-full flex items-center max-h-full flex-col backdrop-blur-sm bg-opacity-40 bg-night overflow-y-scroll">
+          {children}
+        </div>
+      </main>
     </div>
   );
 };
+
+function getInitials(name) {
+  const parts = name.toUpperCase().split(" ");
+  if (parts.length == 0) {
+    return "";
+  }
+  if (parts.length < 2) {
+    return `${parts[0].charAt(0)}`;
+  }
+  return `${parts[0].charAt(0)}${parts[1].charAt(0)}`;
+}
 
 export default AppLayout;
