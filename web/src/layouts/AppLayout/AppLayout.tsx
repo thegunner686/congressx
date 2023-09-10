@@ -29,7 +29,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
   return (
     <div className="flex flex-col items-center justify-start w-screen h-screen">
-      <nav className="w-full h-24 flex items-center justify-between">
+      <nav className="w-full flex items-center justify-between">
         <Link
           className="flex-shrink flex items-center justify-center h-full p-2"
           to={routes.home()}
@@ -42,7 +42,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
               to={routes.stateSelection()}
               className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
             >
-              Vote
+              Voting
             </Link>
             <Link
               to={routes.stateSelection()}
@@ -54,16 +54,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
               to={routes.stateSelection()}
               className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
             >
-              Your Representatives
+              {user?.state ? user.state.name : "Change State"}
             </Link>
           </div>
           <div className="flex-shrink flex items-center justify-center">
-            <Link
-              to={routes.stateSelection()}
-              className="w-auto px-4 h-10 flex items-center justify-center text-zinc-500 font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
-            >
-              Change State
-            </Link>
             <Link
               to={routes.stateSelection()}
               className="w-auto px-4 h-10 flex items-center justify-center text-zinc-500 font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"

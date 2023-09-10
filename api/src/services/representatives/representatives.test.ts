@@ -41,10 +41,6 @@ describe("representatives", () => {
   scenario("creates a representative", async () => {
     const result = await createRepresentative({
       input: {
-        birthYear: 8053144,
-        imageUrl: "String",
-        honorificName: "String",
-        directOrderName: "String",
         firstName: "String",
         lastName: "String",
         invertedOrderName: "String",
@@ -52,10 +48,6 @@ describe("representatives", () => {
       },
     });
 
-    expect(result.birthYear).toEqual(8053144);
-    expect(result.imageUrl).toEqual("String");
-    expect(result.honorificName).toEqual("String");
-    expect(result.directOrderName).toEqual("String");
     expect(result.firstName).toEqual("String");
     expect(result.lastName).toEqual("String");
     expect(result.invertedOrderName).toEqual("String");
@@ -68,10 +60,10 @@ describe("representatives", () => {
     })) as Representative;
     const result = await updateRepresentative({
       id: original.id,
-      input: { birthYear: 1008016 },
+      input: { firstName: "String2" },
     });
 
-    expect(result.birthYear).toEqual(1008016);
+    expect(result.firstName).toEqual("String2");
   });
 
   scenario("deletes a representative", async (scenario: StandardScenario) => {

@@ -1,10 +1,10 @@
 export const schema = gql`
   type Representative {
     id: String!
-    birthYear: Int!
-    imageUrl: String!
-    honorificName: String!
-    directOrderName: String!
+    birthYear: Int
+    imageUrl: String
+    honorificName: String
+    directOrderName: String
     firstName: String!
     lastName: String!
     invertedOrderName: String!
@@ -25,13 +25,15 @@ export const schema = gql`
   type Query {
     representatives: [Representative!]! @requireAuth
     representative(id: String!): Representative @requireAuth
+    senators(stateId: String!): [Representative!]! @skipAuth
+    houseRep(districtNumber: Int!, stateId: String!): Representative @skipAuth
   }
 
   input CreateRepresentativeInput {
-    birthYear: Int!
-    imageUrl: String!
-    honorificName: String!
-    directOrderName: String!
+    birthYear: Int
+    imageUrl: String
+    honorificName: String
+    directOrderName: String
     firstName: String!
     lastName: String!
     invertedOrderName: String!

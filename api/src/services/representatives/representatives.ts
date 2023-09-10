@@ -10,6 +10,33 @@ export const representatives: QueryResolvers["representatives"] = () => {
   return db.representative.findMany();
 };
 
+export const senators: QueryResolvers["senators"] = ({ stateId }) => {
+  return db.representative.findMany({
+    where: {
+      stateId,
+      terms: {
+        some: {
+          chamber: "Senate",
+        },
+      },
+    },
+  });
+};
+
+export const houseRep: QueryResolvers["houseRep"] = ({
+  stateId,
+  districtNumber,
+}) => {
+  return db.representative.findFirst({
+    where: {
+      district: {
+        number: districtNumber,
+      },
+      stateId,
+    },
+  });
+};
+
 export const representative: QueryResolvers["representative"] = ({ id }) => {
   return db.representative.findUnique({
     where: { id },

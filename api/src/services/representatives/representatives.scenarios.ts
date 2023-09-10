@@ -5,10 +5,6 @@ export const standard = defineScenario<Prisma.RepresentativeCreateArgs>({
   representative: {
     one: {
       data: {
-        birthYear: 7616719,
-        imageUrl: "String",
-        honorificName: "String",
-        directOrderName: "String",
         firstName: "String",
         lastName: "String",
         invertedOrderName: "String",
@@ -17,10 +13,6 @@ export const standard = defineScenario<Prisma.RepresentativeCreateArgs>({
     },
     two: {
       data: {
-        birthYear: 6967016,
-        imageUrl: "String",
-        honorificName: "String",
-        directOrderName: "String",
         firstName: "String",
         lastName: "String",
         invertedOrderName: "String",

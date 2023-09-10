@@ -7,7 +7,7 @@ export const schema = gql`
     stateId: String
     representatives: [Representative]!
     district: District
-    districtId: String
+    districtNumber: Int
     votes: [Vote]!
     comments: [Comment]!
     polls: [Poll]!
@@ -19,22 +19,21 @@ export const schema = gql`
   }
 
   input CreateUserInput {
-    id: String!
     email: String!
     name: String
     stateId: String
-    districtId: String
+    districtNumber: Int
   }
 
   input UpdateUserInput {
     email: String
     name: String
     stateId: String
-    districtId: String
+    districtNumber: Int
   }
 
   type Mutation {
-    createUser(input: CreateUserInput!): User! @skipAuth
+    createUser(input: CreateUserInput!): User! @requireAuth
     updateUser(id: String!, input: UpdateUserInput!): User! @requireAuth
     deleteUser(id: String!): User! @requireAuth
   }

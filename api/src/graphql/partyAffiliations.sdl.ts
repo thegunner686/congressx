@@ -5,6 +5,7 @@ export const schema = gql`
     representativeId: String!
     party: Party!
     partyName: String!
+    startYear: Int!
   }
 
   type Query {
@@ -15,11 +16,13 @@ export const schema = gql`
   input CreatePartyAffiliationInput {
     representativeId: String!
     partyName: String!
+    startYear: Int!
   }
 
   input UpdatePartyAffiliationInput {
     representativeId: String
     partyName: String
+    startYear: Int!
   }
 
   type Mutation {

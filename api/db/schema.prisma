@@ -83,9 +83,9 @@ model PartyAffiliation {
   id String @id @default(uuid())
   representative Representative @relation(fields: [representativeId], references: [id])
   representativeId String
+  startYear Int
   party Party? @relation(fields: [partyName], references: [name])
   partyName String
-  startYear Int
   @@unique([representativeId, partyName, startYear])
   @@index([representativeId, partyName, startYear])
 }

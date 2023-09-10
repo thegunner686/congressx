@@ -6,7 +6,7 @@ import {} from "src/lib/formatters";
 
 import type { FindStateById } from "types/graphql";
 
-const update_user = gql`
+export const update_user = gql`
   mutation UpdateUserById($id: String!, $input: UpdateUserInput!) {
     updateUser(id: $id, input: $input) {
       id

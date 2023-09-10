@@ -15,6 +15,9 @@ export const GET_USER = gql`
       state {
         name
         imageUrl
+        districts {
+          number
+        }
       }
       district {
         number

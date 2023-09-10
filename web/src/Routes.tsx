@@ -14,11 +14,40 @@ import ScaffoldLayout from "src/layouts/ScaffoldLayout";
 import { useAuth } from "./auth";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
 import { UserProvider } from "./contexts/UserContext";
+import { RepresentativesProvider } from "./contexts/RepresentativesContext";
 import AppLayout from "./layouts/AppLayout/AppLayout";
 
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Set
+        wrap={ScaffoldLayout}
+        title="Representatives"
+        titleTo="representatives"
+        buttonLabel="New Representative"
+        buttonTo="newRepresentative"
+      >
+        <Route
+          path="/representatives/new"
+          page={RepresentativeNewRepresentativePage}
+          name="newRepresentative"
+        />
+        <Route
+          path="/representatives/{id}/edit"
+          page={RepresentativeEditRepresentativePage}
+          name="editRepresentative"
+        />
+        <Route
+          path="/representatives/{id}"
+          page={RepresentativeRepresentativePage}
+          name="representative"
+        />
+        <Route
+          path="/representatives"
+          page={RepresentativeRepresentativesPage}
+          name="representatives"
+        />
+      </Set>
       <Set wrap={AuthLayout}>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
@@ -33,7 +62,10 @@ const Routes = () => {
           name="resetPassword"
         />
       </Set>
-      <Private unauthenticated="home" wrap={[UserProvider, AppLayout]}>
+      <Private
+        unauthenticated="home"
+        wrap={[UserProvider, RepresentativesProvider, AppLayout]}
+      >
         <Route path="/feed" page={FeedPage} name="feed" />
         <Route path="/discover" page={DiscoverPage} name="discover" />
         <Route
