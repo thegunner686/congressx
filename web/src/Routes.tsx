@@ -67,7 +67,6 @@ const Routes = () => {
         wrap={[UserProvider, RepresentativesProvider, AppLayout]}
       >
         <Route path="/feed" page={FeedPage} name="feed" />
-        <Route path="/discover" page={DiscoverPage} name="discover" />
         <Route
           path="/state-selection"
           page={StateSelectionPage}
