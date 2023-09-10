@@ -17,6 +17,13 @@ export const QUERY = gql`
       invertedOrderName
       active
       stateId
+      leadership {
+        congressNumber
+        type
+      }
+      congresses {
+        number
+      }
       district {
         number
       }
