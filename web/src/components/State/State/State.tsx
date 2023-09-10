@@ -26,11 +26,10 @@ const State = ({ state }: Props) => {
   const [loading, setLoading] = useState(false);
 
   const onClick = useCallback(async () => {
-    console.log(user);
     if (!user) return;
     setLoading(true);
 
-    if (user.state) {
+    if (user.stateId) {
       await updateUser({
         variables: {
           id: user.id,
