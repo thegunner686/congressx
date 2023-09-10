@@ -35,6 +35,7 @@ const State = ({ state }: Props) => {
           id: user.id,
           input: {
             stateId: null,
+            districtNumber: null,
           },
         },
       });
@@ -44,6 +45,7 @@ const State = ({ state }: Props) => {
           id: user.id,
           input: {
             stateId: state.id,
+            districtNumber: 1,
           },
         },
       });
