@@ -157,7 +157,7 @@ model Bill {
 
 model BillAction {
   id String @id @default(uuid())
-  code String
+  code String?
   date DateTime
   text String
   type String
@@ -201,6 +201,7 @@ model Voting {
   rollCallNumber Int
   status String
   type String
+  chamber String
 }
 
 model RepresentativeVote {

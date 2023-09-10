@@ -66,7 +66,7 @@ const Routes = () => {
         unauthenticated="home"
         wrap={[UserProvider, RepresentativesProvider, AppLayout]}
       >
-        <Route path="/feed" page={FeedPage} name="feed" />
+        <Route path="/voting" page={VotingPage} name="voting" />
         <Route
           path="/state-selection"
           page={StateSelectionPage}

@@ -33,7 +33,7 @@ export const getAllRepresentatives = async () => {
   // const testQuery = await getRepresentativesBatch(0, 1)
   // const count = testQuery.pagination.count
   const count = 2515;
-  const batches = Math.ceil(count / limit);
+  const batches = 1; //Math.ceil(count / limit);
 
   const queries = [];
   for (let i = 0; i < batches; i++) {

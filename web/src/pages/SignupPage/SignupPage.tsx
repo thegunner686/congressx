@@ -44,7 +44,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.feed());
+      navigate(routes.voting());
     }
   }, [isAuthenticated]);
 

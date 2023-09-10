@@ -39,16 +39,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <div className="flex flex-grow items-center justify-between bg-night p-2">
           <div className="flex-grow flex flex-row items-center justify-start">
             <Link
-              to={routes.stateSelection()}
+              to={routes.voting()}
               className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
             >
               Voting
-            </Link>
-            <Link
-              to={routes.stateSelection()}
-              className="w-auto px-4 h-10 flex items-center justify-center text-white font-archivo text-sm cursor-pointer hover:bg-zinc-900 rounded transition-all mr-4"
-            >
-              Petitions
             </Link>
             <Link
               to={routes.stateSelection()}
@@ -77,10 +71,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         </div>
       </nav>
       <main
-        className={`bg-cover bg-no-repeat w-screen max-h-screen animate-fade-in transition-all flex-grow overflow-y-scroll`}
+        className={`bg-cover bg-no-repeat w-screen max-h-screen animate-fade-in transition-all flex-grow overflow-y-scroll no-scrollbar`}
         ref={ref}
       >
-        <div className="w-full flex items-center h-full flex-col backdrop-blur-sm bg-opacity-40 bg-night overflow-y-scroll">
+        <div className="w-full flex items-center h-full flex-col backdrop-blur-sm bg-opacity-40 bg-night overflow-y-scroll no-scrollbar">
           {children}
         </div>
       </main>

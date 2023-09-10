@@ -5,18 +5,27 @@ import { db } from "./db";
 export async function indexAllRepresentatives() {
   const reps = await getAllRepresentatives();
 
-  console.log({ length: reps.length });
+  // indexing specific rep
+  const found = reps.filter((rep) => rep.name.includes("Cicilline"));
+  if (found[0]) {
+    console.log(`Indexing ${found[0].name}`);
+    await indexRepresentative(found[0]);
+  }
+  // console.log({ length: reps.length });
 
   // Intentionally making things slow to reduce connections to db
   // max connections is 9
-  for (let i = 0; i < reps.length; i++) {
-    const rep = reps[i];
-    const { inactive } = getStartYearAndChamber(rep);
-    if (!inactive) {
-      console.log(`Indexing ${i}`);
-      await indexRepresentative(rep);
-    }
-  }
+  // for (let i = 0; i < reps.length; i++) {
+  //   const rep = reps[i];
+  //   // const { inactive } = getStartYearAndChamber(rep);
+  //   if (rep.name.includes("Cicilline")) {
+  //     console.log(rep)
+  //     break;
+  //     // console.log(`Indexing ${i}`);
+  //     // await indexRepresentative(rep);
+  //     // break;
+  //   }
+  // }
 }
 
 async function indexRepresentative(representative) {

@@ -22,7 +22,7 @@ const Representative = ({ representative }: Props) => {
   }, [terms]);
 
   return (
-    <div className="bg-emerald-950 rounded w-11/12 h-24 shadow my-2 flex flex-row hover:scale-95 hover:bg-emerald-900 transition-all cursor-pointer">
+    <div className="bg-emerald-950 bg-opacity-50 rounded w-11/12 h-24 shadow my-2 flex flex-row hover:scale-95 hover:bg-emerald-900 transition-all cursor-pointer">
       <div>
         <img
           src={imageUrl}
@@ -38,24 +38,24 @@ const Representative = ({ representative }: Props) => {
         </div>
         <div
           className={`rounded p-1 px-4 font-archivo flex flex-row items-center max-w-fit ${
-            currentTerm.chamber == "Senate"
+            currentTerm.latest?.chamber == "Senate"
               ? "bg-amber-700 text-amber-950"
               : "bg-cyan-700 text-cyan-950"
           }`}
         >
-          {currentTerm.chamber}
+          {currentTerm.latest?.chamber}
           {district ? (
             <>
               <span className="material-icons text-xs mx-2">
                 fiber_manual_record
-              </span>{" "}
+              </span>
               District {district.number}
             </>
           ) : null}
           <span className="material-icons text-xs mx-2">
             fiber_manual_record
           </span>
-          since {currentTerm.startYear}
+          since {currentTerm.oldest?.startYear}
         </div>
       </div>
     </div>
@@ -72,10 +72,13 @@ function getCurrentParty(partyHistory) {
 
 function getCurrentTerm(terms) {
   if (terms == null || terms.length == 0) {
-    return "Insufficient Term Data";
+    return {};
   }
-  console.log({ terms });
-  return [...terms].sort((t1, t2) => t1.startYear - t2.startYear)[0];
+  const sortedTerms = [...terms].sort((t1, t2) => t2.startYear - t1.startYear);
+  return {
+    latest: sortedTerms[0],
+    oldest: sortedTerms[sortedTerms.length - 1],
+  };
 }
 
 export default Representative;

@@ -42,11 +42,11 @@ export const build_congress_request = () => {
     .query_param("format", "json");
 };
 
-export const fetch_congress_api = async (request) => {
+export const fetch_congress_api = async (request, api_key?) => {
   const res = await fetch(request.done(), {
     method: "GET",
     headers: {
-      "X-Api-Key": process.env.CONGRESS_API_KEY,
+      "X-Api-Key": api_key ? api_key : process.env.CONGRESS_API_KEY,
     },
   });
 

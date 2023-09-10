@@ -44,12 +44,12 @@ const StateSelectionPage = () => {
   return (
     <>
       <MetaTags title="StateSelection" description="StateSelection page" />
-      <main className="flex flex-col items-center justify-center w-full p-4">
+      <main className="flex flex-col items-center justify-center w-full p-4 animate-fade-in transition-all">
         {user?.state ? (
           <>
             <div className="flex flex-row w-full">
-              <section className="flex-1 h-full rounded-lg bg-green-950 bg-opacity-95 flex flex-col items-center p-2 pb-8">
-                <div className="w-full p-4 flex flex-row items-center justify-between">
+              <section className="flex-1 h-full rounded-lg bg-opacity-95 flex flex-col items-center p-2 pb-8">
+                <div className="w-full p-4 flex flex-row items-center justify-around">
                   <h3 className="text-white text-2xl font-archivo">
                     Your Representatives
                   </h3>
