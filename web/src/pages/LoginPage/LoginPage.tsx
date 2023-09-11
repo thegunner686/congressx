@@ -67,7 +67,7 @@ const LoginPage = () => {
                       className="text-night font-archivo"
                       errorClassName="font-archivo text-night mt-4 mb-1"
                     >
-                      Username
+                      Email
                     </Label>
                     <TextField
                       name="username"

@@ -28,14 +28,14 @@ const HomePage = () => {
               Restoring the Vision
             </h3>
             <p className="m-4 font-archivo text-zinc-500 text-left text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus
-              magna fringilla urna porttitor rhoncus dolor. Amet mauris commodo
-              quis imperdiet massa tincidunt nunc pulvinar. Metus dictum at
-              tempor commodo ullamcorper. Lectus proin nibh nisl condimentum id
-              venenatis. Id leo in vitae turpis. Augue mauris augue neque
-              gravida in fermentum. Vehicula ipsum a arcu cursus vitae congue
-              mauris rhoncus aenean. Odio ut sem nulla pharetra.
+              We live in a time of unprecedented connectivity and communication,
+              so why do so many Americans feel that their voices aren't being
+              heard by their elected representatives? CongressX aims to be
+              another tool for democracy, so every citizen can stay informed
+              about what's being done on their behalf in Congress and to
+              communicate what laws they want passed. Join us in restoring a
+              vision of America where representatives are held accountable, and
+              must truly serve the people, not the other way around.
             </p>
             <Link
               to={routes.login()}
