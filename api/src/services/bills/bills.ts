@@ -10,6 +10,83 @@ export const bills: QueryResolvers["bills"] = () => {
   return db.bill.findMany();
 };
 
+export const searchBillsByTitle: QueryResolvers["bills"] = ({
+  searchText,
+  order,
+  subjectId,
+}) => {
+  if (
+    ((searchText == null || searchText.trim().length == 0) &&
+      subjectId == null) ||
+    subjectId.trim().length == 0
+  ) {
+    return db.bill.findMany({
+      orderBy: [
+        {
+          introducedDate: order,
+        },
+      ],
+      take: 5,
+    });
+  } else if (subjectId && subjectId.trim().length > 0) {
+    return db.bill.findMany({
+      orderBy: [
+        {
+          introducedDate: order,
+        },
+      ],
+      where: {
+        legislativeSubjects: {
+          some: {
+            id: subjectId,
+          },
+        },
+      },
+      take: 5,
+    });
+  }
+  if (subjectId == null || subjectId.trim().length == 0) {
+    return db.bill.findMany({
+      orderBy: [
+        {
+          introducedDate: order,
+        },
+      ],
+      where: {
+        title: {
+          search: searchText,
+        },
+      },
+      take: 5,
+    });
+  }
+
+  return db.bill.findMany({
+    orderBy: [
+      {
+        introducedDate: order,
+      },
+    ],
+    where: {
+      AND: [
+        {
+          title: {
+            search: searchText,
+          },
+        },
+        {
+          legislativeSubjects: {
+            some: {
+              id: subjectId,
+            },
+          },
+        },
+      ],
+    },
+    take: 5,
+  });
+};
+
 export const bill: QueryResolvers["bill"] = ({ id }) => {
   return db.bill.findUnique({
     where: { id },

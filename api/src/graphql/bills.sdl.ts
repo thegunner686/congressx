@@ -22,6 +22,11 @@ export const schema = gql`
   type Query {
     bills: [Bill!]! @requireAuth
     bill(id: String!): Bill @requireAuth
+    searchBillsByTitle(
+      searchText: String!
+      order: String!
+      subjectId: String!
+    ): [Bill] @requireAuth
   }
 
   input CreateBillInput {
