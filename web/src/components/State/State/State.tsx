@@ -61,7 +61,7 @@ const State = ({ state }: Props) => {
     <button
       className={`${
         loading ? "animate-pulse" : ""
-      } lg:w-96 lg:h-48 w-72 h-36 relative flex flex-col items-center justify-center cursor-pointer shadow-lg shadow-gray-800 rounded ${hoverClasses} mb-8 transition-all group hover:scale-95`}
+      } lg:w-96 lg:h-48 w-72 h-36 relative flex flex-col items-center justify-center cursor-pointer shadow-lg shadow-gray-800 rounded ${hoverClasses} mb-8 transition-all group hover:scale-95 animate-fade-in transition-all`}
       onClick={onClick}
       disabled={loading}
     >

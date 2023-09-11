@@ -1,6 +1,8 @@
 import { Link, routes } from "@redwoodjs/router";
 import { MetaTags, useQuery } from "@redwoodjs/web";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Bill from "src/components/Bill/Bill/Bill";
+import BillCell from "src/components/Bill/BillCell";
 
 const subjects_query = gql`
   query GetSubjects {
@@ -23,7 +25,7 @@ const bill_search = gql`
       order: $order
       subjectId: $subjectId
     ) {
-      title
+      id
     }
   }
 `;
@@ -94,7 +96,7 @@ const VotingPage = () => {
     <>
       <MetaTags title="Voting" description="Voting page" />
       <main className="flex flex-row items-start justify-start w-full p-4 animate-fade-in transition-all">
-        <section className="w-96 h-[36rem] p-2 ">
+        <section className="w-96 h-[40rem] p-2">
           <button
             className="font-archivo text-white flex flex-row items-center justify-around"
             onClick={toggleSubjectFilter}
@@ -133,8 +135,8 @@ const VotingPage = () => {
               })}
           </div>
         </section>
-        <section>
-          <div className="w-[36rem]">
+        <section className="flex-grow">
+          <div className=" w-3/5">
             <div className="flex flex-row shadow w-full">
               <input
                 className="flex-grow rounded-tl  outline-none shadow-zinc-500 p-2 font-archivo text-sm text-zinc-800"
@@ -166,6 +168,11 @@ const VotingPage = () => {
                 </button>
               ) : null}
             </div>
+          </div>
+          <div className="mt-8">
+            {billsData?.bills.map((bill) => {
+              return <BillCell id={bill.id} key={bill.id} />;
+            })}
           </div>
         </section>
       </main>

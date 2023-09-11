@@ -7,26 +7,20 @@ export const standard = defineScenario<Prisma.BillCreateArgs>({
       data: {
         id: "String",
         title: "String",
-        introducedDate: "2023-09-04T16:14:38.306Z",
+        introducedDate: "2023-09-11T01:17:27.958Z",
         originChamber: "String",
         type: "String",
-        number: 6777301,
-        congress: {
-          create: { number: 3171285, startYear: 7530817, endYear: 439459 },
-        },
+        number: 9999456,
       },
     },
     two: {
       data: {
         id: "String",
         title: "String",
-        introducedDate: "2023-09-04T16:14:38.307Z",
+        introducedDate: "2023-09-11T01:17:27.958Z",
         originChamber: "String",
         type: "String",
-        number: 6699474,
-        congress: {
-          create: { number: 5704069, startYear: 3512035, endYear: 1340918 },
-        },
+        number: 1130729,
       },
     },
   },

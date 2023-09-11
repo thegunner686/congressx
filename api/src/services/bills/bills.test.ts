@@ -27,21 +27,21 @@ describe("bills", () => {
       input: {
         id: "String",
         title: "String",
-        introducedDate: "2023-09-04T16:14:38.281Z",
+        introducedDate: "2023-09-11T01:17:27.945Z",
         congressNumber: scenario.bill.two.congressNumber,
         originChamber: "String",
         type: "String",
-        number: 1320369,
+        number: 7083821,
       },
     });
 
     expect(result.id).toEqual("String");
     expect(result.title).toEqual("String");
-    expect(result.introducedDate).toEqual(new Date("2023-09-04T16:14:38.281Z"));
+    expect(result.introducedDate).toEqual(new Date("2023-09-11T01:17:27.945Z"));
     expect(result.congressNumber).toEqual(scenario.bill.two.congressNumber);
     expect(result.originChamber).toEqual("String");
     expect(result.type).toEqual("String");
-    expect(result.number).toEqual(1320369);
+    expect(result.number).toEqual(7083821);
   });
 
   scenario("updates a bill", async (scenario: StandardScenario) => {

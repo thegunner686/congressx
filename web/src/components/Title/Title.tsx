@@ -21,6 +21,7 @@ const Title: React.FC<TitleProps> = ({ size = "lg", className }) => {
     <div
       className={`flex-row font-extrabold uppercase text-white shadow-silver text-shadow-sm flex items-center justify-center font-archivo text-center ${titleClassName} ${className}`}
     >
+      <img src="/CongressX_Logo.png" className="w-8 h-8 rounded mr-1" />
       CongressX
     </div>
   );

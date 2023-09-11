@@ -2,6 +2,7 @@
 // import { db } from "api/src/lib/db";
 import { indexAllRepresentatives } from "api/src/lib/crawl";
 import { indexAllBills, indexBill, indexVoting } from "api/src/lib/indexBills";
+import { cleanAllSummaries } from "api/src/lib/cleanSummaries";
 export default async () => {
   try {
     //
@@ -13,9 +14,10 @@ export default async () => {
     // await indexAllRepresentatives();
 
     // await indexBill({ number: 1450 })
-    // await indexAllBills()
+    await indexAllBills();
 
-    await indexVoting();
+    // await indexVoting();
+    // await cleanAllSummaries();
   } catch (error) {
     console.warn("Please define your seed data.");
     console.error(error);

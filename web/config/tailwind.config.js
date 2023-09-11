@@ -5,6 +5,11 @@ module.exports = {
   content: ["src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        xs: "0.8rem",
+        "2xs": "0.7rem",
+        "3xs": "0.6rem",
+      },
       textShadow: {
         sm: "0 1px 2px var(--tw-shadow-color)",
         DEFAULT: "0 2px 4px var(--tw-shadow-color)",

@@ -10,6 +10,8 @@ export const bills: QueryResolvers["bills"] = () => {
   return db.bill.findMany();
 };
 
+const take = 15;
+
 export const searchBillsByTitle: QueryResolvers["bills"] = ({
   searchText,
   order,
@@ -26,7 +28,7 @@ export const searchBillsByTitle: QueryResolvers["bills"] = ({
           introducedDate: order,
         },
       ],
-      take: 5,
+      take,
     });
   } else if (subjectId && subjectId.trim().length > 0) {
     return db.bill.findMany({
@@ -42,7 +44,7 @@ export const searchBillsByTitle: QueryResolvers["bills"] = ({
           },
         },
       },
-      take: 5,
+      take,
     });
   }
   if (subjectId == null || subjectId.trim().length == 0) {
@@ -57,7 +59,7 @@ export const searchBillsByTitle: QueryResolvers["bills"] = ({
           search: searchText,
         },
       },
-      take: 5,
+      take,
     });
   }
 
@@ -83,7 +85,7 @@ export const searchBillsByTitle: QueryResolvers["bills"] = ({
         },
       ],
     },
-    take: 5,
+    take,
   });
 };
 

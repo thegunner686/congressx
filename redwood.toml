@@ -9,7 +9,7 @@
   title = "CongressX"
   port = 8910
   apiUrl = "/api"
-  includeEnvironmentVariables = ["SUPABASE_URL", "SUPABASE_KEY", "CONGRESS_API_KEY"]
+  includeEnvironmentVariables = ["SUPABASE_URL", "SUPABASE_KEY", "CONGRESS_API_KEY", "OPEN_AI_API_KEY"]
 [api]
   port = 8911
 [browser]

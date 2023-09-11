@@ -35,7 +35,7 @@ const Representative = ({ representative }: Props) => {
   }, [leadership]);
 
   return (
-    <div className="bg-emerald-950 bg-opacity-70 rounded w-11/12 h-fit shadow my-2 flex flex-row hover:scale-95 hover:bg-emerald-900 hover:bg-opacity-90 transition-all cursor-pointer">
+    <div className="bg-emerald-950 bg-opacity-70 rounded w-11/12 h-fit shadow my-2 flex flex-row hover:scale-95 hover:bg-emerald-900 hover:bg-opacity-90 animate-fade-in transition-all cursor-pointer">
       <div>
         <img
           src={imageUrl}
@@ -43,7 +43,7 @@ const Representative = ({ representative }: Props) => {
         />
       </div>
       <div className="p-2 flex-grow flex flex-col">
-        <div className="font-archivo flex-row flex items-end mb-1">
+        <div className="font-archivo flex-row flex items-center mb-1">
           <div className="text-white font-archivo text-2xl">
             {directOrderName}
           </div>
@@ -59,7 +59,7 @@ const Representative = ({ representative }: Props) => {
           {termInfo.latest?.chamber}
           {district ? (
             <>
-              <span className="material-icons text-xs mx-2">
+              <span className="material-icons text-[6px] mx-2">
                 fiber_manual_record
               </span>
               District {district.number}
@@ -107,8 +107,8 @@ function getCurrentParty(partyHistory) {
   if (partyHistory == null || partyHistory.length == 0) {
     return "No Party Affiliation";
   }
-  return partyHistory.sort((p1, p2) => p1.startYear - p2.startYear)[0].party
-    .name;
+  return [...partyHistory].sort((p1, p2) => p1.startYear - p2.startYear)[0]
+    .party.name;
 }
 
 function getTermInfo(terms) {

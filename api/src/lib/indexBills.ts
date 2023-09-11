@@ -6,7 +6,7 @@ import {
 import fs from "fs";
 import { db } from "./db";
 
-const BILL_TYPE = "hr";
+const BILL_TYPE = "s";
 const CONGRESS = 118;
 
 const api_keys = [
@@ -72,7 +72,7 @@ export async function indexAllBills() {
 
   // Intentionally making things slow to reduce connections to db
   // max connections is 9
-  for (let i = 1819; i < bills.length; i++) {
+  for (let i = 0; i < bills.length; i++) {
     const api_key = api_keys[i % api_keys.length];
     const bill = bills[i];
     console.log(`Indexing (${i}) Bill ${bill.number}`);
