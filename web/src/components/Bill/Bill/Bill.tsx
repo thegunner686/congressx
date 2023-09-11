@@ -1,13 +1,39 @@
 import { FindBillById } from "types/graphql";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { useRepresentativesContext } from "src/contexts/RepresentativesContext";
+import { useMutation } from "@redwoodjs/web";
+import { useUserContext } from "src/contexts/UserContext";
+
+const cast_vote = gql`
+  mutation CastVote($input: CreateVoteInput!) {
+    createVote(input: $input) {
+      id
+    }
+  }
+`;
+
+const update_vote = gql`
+  mutation UpdateCastedVote($id: String!, $input: UpdateVoteInput!) {
+    updateVote(id: $id, input: $input) {
+      id
+    }
+  }
+`;
 
 interface Props {
   bill: NonNullable<FindBillById["bill"]>;
 }
 
 const Bill = ({ bill }: Props) => {
+  const [castVote] = useMutation(cast_vote, {
+    refetchQueries: ["FindBillById"],
+  });
+  const [updateVote] = useMutation(update_vote, {
+    refetchQueries: ["FindBillById"],
+  });
+
+  const user = useUserContext();
   const representatives = useRepresentativesContext();
 
   const billStatus = useMemo(() => {
@@ -33,10 +59,43 @@ const Bill = ({ bill }: Props) => {
     return cosponsors;
   }, [bill]);
 
+  const myVote = useMemo(() => {
+    const vote = getMyVote(bill, user.id);
+    return vote;
+  }, [bill, user]);
+
+  const onVotePressed = useCallback(
+    async (result) => {
+      const found = bill.userVotes.find((vote) => vote.user.id === user.id);
+      console.log({ found });
+      if (found) {
+        await updateVote({
+          variables: {
+            id: found.id,
+            input: {
+              result,
+            },
+          },
+        });
+      } else {
+        await castVote({
+          variables: {
+            input: {
+              result,
+              userId: user.id,
+              billId: bill.id,
+            },
+          },
+        });
+      }
+    },
+    [castVote, updateVote, bill, user],
+  );
+
   return (
     <>
       <div className="animate-fade-in transition-all h-fit m-2 flex flex-row">
-        <div className="bg-night bg-opacity-80 flex-1 p-2 shadow rounded">
+        <div className="bg-night bg-opacity-80 flex-1 p-2 shadow rounded-tl rounded-bl rounded-br">
           <div className="w-full flex flex-row text-white font-archivo items-center justify-start">
             <div className="text-zinc-400 font-archivo text-xs">
               Bill {bill.number}
@@ -71,7 +130,7 @@ const Bill = ({ bill }: Props) => {
             )}
             {billSponsors != null && billSponsors.length > 0 && (
               <>
-                <div className="text-zinc-400 font-archivo">Sponsors</div>
+                <div className="text-zinc-400 font-archivo mt-4">Sponsor</div>
                 {billSponsors.map((representative) => {
                   return (
                     <div
@@ -98,7 +157,9 @@ const Bill = ({ bill }: Props) => {
             )}
             {billCosponsors != null && billCosponsors.length > 0 && (
               <>
-                <div className="text-zinc-400 font-archivo">Co-Sponsors</div>
+                <div className="text-zinc-400 font-archivo mt-4">
+                  Co-Sponsors
+                </div>
                 {billCosponsors.map((representative) => {
                   return (
                     <div
@@ -126,7 +187,7 @@ const Bill = ({ bill }: Props) => {
             {representativeVotes != null && representativeVotes.length > 0 && (
               <>
                 {" "}
-                <div className="text-zinc-400 font-archivo">
+                <div className="text-zinc-400 font-archivo mt-4">
                   How your Representatives voted
                 </div>
                 {representativeVotes.map((vote) => {
@@ -169,7 +230,50 @@ const Bill = ({ bill }: Props) => {
             )}
           </div>
         </div>
-        <div className="w-48 flex-shrink h-full"></div>
+        <div className="w-48 flex-shrink h-full flex flex-col justify-between">
+          <div className="flex-1">
+            <div className=" w-full h-12 rounded-tr font-archivo text-white flex items-center justify-center text-lg">
+              Your Vote
+            </div>
+            <button
+              onClick={() => onVotePressed("Yea")}
+              className={`${
+                myVote && myVote.result == "Yea"
+                  ? "bg-green-800 bg-opacity-100"
+                  : "bg-green-700 bg-opacity-10"
+              } m-2 rounded w-full text-xl flex items-center justify-center text-green-500 border-8 border-green-700 p-4 font-archivo transition-all hover:scale-125 hover:bg-opacity-100 hover:bg-green-800 hover:rounded uppercase`}
+            >
+              <span className="material-icons mr-1">thumb_up</span> Yea
+            </button>
+            <button
+              onClick={() => onVotePressed("Nay")}
+              className={`${
+                myVote && myVote.result == "Nay"
+                  ? "bg-red-800 bg-opacity-100"
+                  : "bg-red-700 bg-opacity-10"
+              } m-2 rounded w-full text-xl flex items-center justify-center text-red-500 border-8 border-red-700 p-4 font-archivo transition-all hover:scale-125 hover:bg-opacity-100 hover:bg-red-800 hover:rounded uppercase`}
+            >
+              <span className="material-icons mr-1">thumb_down</span> Nay
+            </button>
+          </div>
+          <div className="flex-1">
+            <div className=" w-full h-12 rounded-tr font-archivo text-white flex items-center justify-center text-lg">
+              Totals
+            </div>
+            <div className="w-full h-12 flex flex-row">
+              <div className="border-b-8 border-green-700 m-2 flex-1 font-archivo text-white flex items-center justify-center text-xl">
+                {bill.userVotes.reduce((count, vote) => {
+                  return count + (vote.result == "Yea" ? 1 : 0);
+                }, 0)}
+              </div>
+              <div className=" border-b-8 border-red-700 m-2 flex-1 font-archivo text-white flex items-center justify-center text-xl">
+                {bill.userVotes.reduce((count, vote) => {
+                  return count + (vote.result == "Nay" ? 1 : 0);
+                }, 0)}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -198,6 +302,12 @@ function getBillSponsors(bill) {
 
 function getBillCosponsors(bill) {
   return bill.cosponsors ?? [];
+}
+
+function getMyVote(bill, userId) {
+  const found = bill.userVotes.find((vote) => vote.user.id === userId);
+
+  return found;
 }
 
 function getRepresentativeVotes(bill, representatives) {

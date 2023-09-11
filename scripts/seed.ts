@@ -14,10 +14,10 @@ export default async () => {
     // await indexAllRepresentatives();
 
     // await indexBill({ number: 1450 })
-    await indexAllBills();
+    // await indexAllBills();
 
     // await indexVoting();
-    // await cleanAllSummaries();
+    await cleanAllSummaries();
   } catch (error) {
     console.warn("Please define your seed data.");
     console.error(error);

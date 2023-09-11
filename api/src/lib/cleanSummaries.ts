@@ -43,18 +43,27 @@ export async function cleanAllSummaries() {
 
   const cleanedSummaries = [];
 
-  for (const summary of summaries) {
-    console.log(`Cleaning ${summary.id}`);
-    const cleaned = await clean_summary(summary.text);
-    cleanedSummaries.push({ text: cleaned });
+  const summaryCleanings = [];
+  for (let i = 0; i < summaries.length; i++) {
+    const summary = summaries[i];
+    console.log(`Starting ${summary.id}`);
+    summaryCleanings.push(
+      clean_summary(summary.text).then((cleaned) => {
+        cleanedSummaries.push({ text: cleaned });
 
-    await db.billSummary.update({
-      where: {
-        id: summary.id,
-      },
-      data: {
-        text: cleaned,
-      },
-    });
+        console.log(`Cleaned ${summary.id}`);
+
+        return db.billSummary.update({
+          where: {
+            id: summary.id,
+          },
+          data: {
+            text: cleaned,
+          },
+        });
+      }),
+    );
   }
+
+  await Promise.all(summaryCleanings);
 }

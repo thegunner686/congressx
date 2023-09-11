@@ -46,6 +46,13 @@ export const QUERY = gql`
       cosponsors {
         ...RepresentativeAttributes
       }
+      userVotes {
+        id
+        user {
+          id
+        }
+        result
+      }
     }
   }
 

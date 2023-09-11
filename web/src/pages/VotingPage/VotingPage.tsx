@@ -96,7 +96,7 @@ const VotingPage = () => {
     <>
       <MetaTags title="Voting" description="Voting page" />
       <main className="flex flex-row items-start justify-start w-full p-4 animate-fade-in transition-all">
-        <section className="w-96 h-[40rem] p-2">
+        <section className="w-[42rem] h-[40rem] p-2">
           <button
             className="font-archivo text-white flex flex-row items-center justify-around"
             onClick={toggleSubjectFilter}
