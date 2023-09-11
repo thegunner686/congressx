@@ -63,7 +63,14 @@ export const QUERY = gql`
   }
 `;
 
-export const Loading = () => <div>Loading...</div>;
+export const Loading = () => (
+  <div className="animate-pulse transition-all h-fit m-2 flex flex-row w-full">
+    <div className="bg-night bg-opacity-80 flex-1 p-2 shadow rounded h-48">
+      {" "}
+    </div>
+    <div className="w-48"></div>
+  </div>
+);
 
 export const Empty = () => <div>Bill not found</div>;
 

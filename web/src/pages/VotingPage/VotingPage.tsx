@@ -57,7 +57,7 @@ const VotingPage = () => {
   const { data: subjectsData } = useQuery(subjects_query);
   const [billSearchValue, setBillSearchValue] = useState("");
   const [selectedSubject, setSelectedSubject] = useState(null);
-  const [subjectFilterOpen, setSubjectFilterOpen] = useState(false);
+  const [subjectFilterOpen, setSubjectFilterOpen] = useState(true);
   const { data: billsData } = useQuery(bill_search, {
     variables: {
       searchText: billSearchValue,
